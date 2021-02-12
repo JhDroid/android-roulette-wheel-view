@@ -125,12 +125,14 @@ class Roulette(
      * */
     fun setCircleStrokeColor(color: Int) {
         this.strokePaint.color = color
+        invalidate()
     }
 
     fun getCircleStrokeColor(): Int = this.strokePaint.color
 
     fun setRouletteSize(size: Int) {
         this.rouletteSize = size
+        invalidate()
     }
 
     fun getRouletteSize(): Int = rouletteSize
