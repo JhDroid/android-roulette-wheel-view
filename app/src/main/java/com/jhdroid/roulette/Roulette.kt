@@ -1,9 +1,15 @@
 package com.jhdroid.roulette
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
+import java.lang.IndexOutOfBoundsException
+import java.lang.RuntimeException
 
 class Roulette(
     context: Context,
@@ -12,27 +18,28 @@ class Roulette(
 ) : View(context, attrs, defStyleAttr) {
 
     companion object {
-        const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 8f
-        const val DEFAULT_DIVIDER_HEIGHT = 5f
+        const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 20f
+        const val DEFAULT_PADDING = 20f
     }
 
-    private var rouletteElementSize = 0
-    private var circleRadius = 0f
+    private val SHAPE_COLORS = intArrayOf(
+        Color.RED,
+        Color.BLUE,
+        Color.GREEN,
+        Color.YELLOW,
+        Color.GRAY
+    )
 
-    private val circlePaint = Paint()
-    private val dividerPaint = Paint()
+    private var rouletteElementSize = 0
+
+    private val strokePaint = Paint()
+    private val fillPaint = Paint()
 
     init {
-        circlePaint.apply {
+        strokePaint.apply {
             color = Color.BLACK
             style = Paint.Style.STROKE
             strokeWidth = DEFAULT_CIRCLE_BORDER_LINE_HEIGHT
-            isAntiAlias = true
-        }
-
-        dividerPaint.apply {
-            color = Color.BLACK
-            strokeWidth = DEFAULT_DIVIDER_HEIGHT
             isAntiAlias = true
         }
     }
@@ -64,20 +71,144 @@ class Roulette(
         return result
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        val centerX = width / 2f
         val centerY = height / 2f
 
-        circleRadius = centerX
+        val rectLeft = left.toFloat() + paddingLeft + DEFAULT_PADDING
+        val rectRight = right.toFloat() - paddingRight - DEFAULT_PADDING
+        val rectTop = ((centerY + top.toFloat()) / 2f) + paddingTop + DEFAULT_PADDING
+        val rectBottom = ((centerY + bottom.toFloat()) / 2f) - paddingBottom - DEFAULT_PADDING
 
-        canvas?.drawCircle(centerX, centerY, circleRadius, circlePaint)
+        val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
+        canvas?.drawArc(rectF, 0f, 360f, true, strokePaint)
+        fillPaint.isAntiAlias = true
 
+        rouletteElementSize = 8
+        val sweepAngle = 360f / rouletteElementSize.toFloat()
         when (rouletteElementSize) {
             2 -> {
-                canvas?.drawLine(left.toFloat(), centerY, right.toFloat(), centerY, dividerPaint)
+                fillPaint.color = SHAPE_COLORS[0]
+                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[1]
+                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
             }
+
+            3 -> {
+                fillPaint.color = SHAPE_COLORS[0]
+                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[1]
+                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
+            }
+
+            4 -> {
+                fillPaint.color = SHAPE_COLORS[0]
+                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[1]
+                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[3]
+                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
+            }
+
+            5 -> {
+                fillPaint.color = SHAPE_COLORS[0]
+                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[1]
+                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[3]
+                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[4]
+                canvas?.drawArc(rectF, sweepAngle * 4f, sweepAngle, true, fillPaint)
+            }
+
+            6 -> {
+                fillPaint.color = SHAPE_COLORS[0]
+                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[1]
+                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[3]
+                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[4]
+                canvas?.drawArc(rectF, sweepAngle * 4f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 5f, sweepAngle, true, fillPaint)
+            }
+
+            7 -> {
+                fillPaint.color = SHAPE_COLORS[0]
+                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[1]
+                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[3]
+                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[4]
+                canvas?.drawArc(rectF, sweepAngle * 4f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 5f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[4]
+                canvas?.drawArc(rectF, sweepAngle * 6f, sweepAngle, true, fillPaint)
+            }
+
+            8 -> {
+                fillPaint.color = SHAPE_COLORS[0]
+                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[1]
+                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[3]
+                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[4]
+                canvas?.drawArc(rectF, sweepAngle * 4f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[2]
+                canvas?.drawArc(rectF, sweepAngle * 5f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[4]
+                canvas?.drawArc(rectF, sweepAngle * 6f, sweepAngle, true, fillPaint)
+
+                fillPaint.color = SHAPE_COLORS[3]
+                canvas?.drawArc(rectF, sweepAngle * 7f, sweepAngle, true, fillPaint)
+            }
+
+            else -> throw RuntimeException("number out of roulette size")
         }
     }
 
