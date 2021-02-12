@@ -18,17 +18,37 @@ class Roulette(
     companion object {
         const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 15f
         const val DEFAULT_PADDING = 20f
+        const val DEFAULT_ROULETTE_SIZE = 2
     }
 
-    private var rouletteElementSize = 0
+    private var rouletteSize = 0
 
     private val strokePaint = Paint()
     private val fillPaint = Paint()
     private var shapeColors = arrayOf<String>()
 
     init {
+        val typedArray = context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.RouletteView,
+            defStyleAttr,
+            0
+        )
+
+        val colorStrokeColor = typedArray.getColor(
+            R.styleable.RouletteView_circleStrokeColor,
+            Color.BLACK
+        )
+
+        rouletteSize = typedArray.getInt(
+            R.styleable.RouletteView_rouletteSize,
+            DEFAULT_ROULETTE_SIZE
+        )
+
+        typedArray.recycle()
+
         strokePaint.apply {
-            color = Color.BLACK
+            color = colorStrokeColor
             style = Paint.Style.STROKE
             strokeWidth = DEFAULT_CIRCLE_BORDER_LINE_HEIGHT
             isAntiAlias = true
@@ -84,13 +104,12 @@ class Roulette(
 
         canvas?.drawArc(rectF, 0f, 360f, true, strokePaint)
 
-        rouletteElementSize = 8
-         drawRoulette(canvas, rectF, rouletteElementSize)
+        drawRoulette(canvas, rectF, rouletteSize)
     }
 
     private fun drawRoulette(canvas: Canvas?, rectF: RectF, size: Int) {
         if (size in 2..8) {
-            val sweepAngle = 360f / rouletteElementSize.toFloat()
+            val sweepAngle = 360f / rouletteSize.toFloat()
 
             for (i in 0..size) {
                 fillPaint.color = Color.parseColor(shapeColors[i])
@@ -104,9 +123,15 @@ class Roulette(
     /**
      * getter & setter
      * */
-    fun setRouletteElementSize(size: Int) {
-        this.rouletteElementSize = size
+    fun setCircleStrokeColor(color: Int) {
+        this.strokePaint.color = color
     }
 
-    fun getRouletteElementSize(): Int = rouletteElementSize
+    fun getCircleStrokeColor(): Int = this.strokePaint.color
+
+    fun setRouletteSize(size: Int) {
+        this.rouletteSize = size
+    }
+
+    fun getRouletteSize(): Int = rouletteSize
 }

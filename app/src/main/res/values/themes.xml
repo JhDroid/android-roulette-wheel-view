@@ -13,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <declare-styleable name="RouletteView">
+        <attr name="circleStrokeColor" format="reference|color"/>
+        <attr name="rouletteSize" format="integer"/>
+    </declare-styleable>
 </resources>
