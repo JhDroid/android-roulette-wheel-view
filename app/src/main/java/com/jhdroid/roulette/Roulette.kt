@@ -84,131 +84,21 @@ class Roulette(
 
         canvas?.drawArc(rectF, 0f, 360f, true, strokePaint)
 
-        fillPaint.isAntiAlias = true
-
         rouletteElementSize = 8
-        val sweepAngle = 360f / rouletteElementSize.toFloat()
-        when (rouletteElementSize) {
-            2 -> {
-                fillPaint.color = Color.parseColor(shapeColors[0])
-                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
+         drawRoulette(canvas, rectF, rouletteElementSize)
+    }
 
-                fillPaint.color = Color.parseColor(shapeColors[1])
-                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
+    private fun drawRoulette(canvas: Canvas?, rectF: RectF, size: Int) {
+        if (size in 2..8) {
+            val sweepAngle = 360f / rouletteElementSize.toFloat()
+
+            for (i in 0..size) {
+                fillPaint.color = Color.parseColor(shapeColors[i])
+
+                val startAngle = if (i == 0) 0f else sweepAngle * i
+                canvas?.drawArc(rectF, startAngle, sweepAngle, true, fillPaint)
             }
-
-            3 -> {
-                fillPaint.color = Color.parseColor(shapeColors[0])
-                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[1])
-                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[2])
-                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
-            }
-
-            4 -> {
-                fillPaint.color = Color.parseColor(shapeColors[0])
-                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[1])
-                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[2])
-                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[3])
-                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
-            }
-
-            5 -> {
-                fillPaint.color = Color.parseColor(shapeColors[0])
-                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[1])
-                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[2])
-                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[3])
-                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[4])
-                canvas?.drawArc(rectF, sweepAngle * 4f, sweepAngle, true, fillPaint)
-            }
-
-            6 -> {
-                fillPaint.color = Color.parseColor(shapeColors[0])
-                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[1])
-                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[2])
-                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[3])
-                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[4])
-                canvas?.drawArc(rectF, sweepAngle * 4f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[5])
-                canvas?.drawArc(rectF, sweepAngle * 5f, sweepAngle, true, fillPaint)
-            }
-
-            7 -> {
-                fillPaint.color = Color.parseColor(shapeColors[0])
-                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[1])
-                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[2])
-                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[3])
-                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[4])
-                canvas?.drawArc(rectF, sweepAngle * 4f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[5])
-                canvas?.drawArc(rectF, sweepAngle * 5f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[6])
-                canvas?.drawArc(rectF, sweepAngle * 6f, sweepAngle, true, fillPaint)
-            }
-
-            8 -> {
-                fillPaint.color = Color.parseColor(shapeColors[0])
-                canvas?.drawArc(rectF, 0f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[1])
-                canvas?.drawArc(rectF, sweepAngle, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[2])
-                canvas?.drawArc(rectF, sweepAngle * 2f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[3])
-                canvas?.drawArc(rectF, sweepAngle * 3f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[4])
-                canvas?.drawArc(rectF, sweepAngle * 4f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[5])
-                canvas?.drawArc(rectF, sweepAngle * 5f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[6])
-                canvas?.drawArc(rectF, sweepAngle * 6f, sweepAngle, true, fillPaint)
-
-                fillPaint.color = Color.parseColor(shapeColors[7])
-                canvas?.drawArc(rectF, sweepAngle * 7f, sweepAngle, true, fillPaint)
-            }
-            else -> throw RuntimeException("number out of roulette size")
-        }
+        } else throw RuntimeException("size out of roulette size")
     }
 
     /**
