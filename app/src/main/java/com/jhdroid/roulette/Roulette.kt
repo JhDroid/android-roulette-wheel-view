@@ -11,16 +11,30 @@ class Roulette(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    companion object {
+        const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 8f
+        const val DEFAULT_DIVIDER_HEIGHT = 5f
+    }
+
+    private var size = 0
     private var circleRadius = 0f
 
-    private var circlePaint = Paint()
+    private val circlePaint = Paint()
+    private val dividerPaint = Paint()
 
     init {
-        circlePaint = Paint()
-        circlePaint.color = Color.BLACK
-        circlePaint.style = Paint.Style.STROKE
-        circlePaint.strokeWidth = 10f
-        circlePaint.isAntiAlias = true
+        circlePaint.apply {
+            color = Color.BLACK
+            style = Paint.Style.STROKE
+            strokeWidth = DEFAULT_CIRCLE_BORDER_LINE_HEIGHT
+            isAntiAlias = true
+        }
+
+        dividerPaint.apply {
+            color = Color.BLACK
+            strokeWidth = DEFAULT_DIVIDER_HEIGHT
+            isAntiAlias = true
+        }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -59,5 +73,20 @@ class Roulette(
         circleRadius = centerX
 
         canvas?.drawCircle(centerX, centerY, circleRadius, circlePaint)
+
+        when (size) {
+            2 -> {
+                canvas?.drawLine(left.toFloat(), centerY, right.toFloat(), centerY, dividerPaint)
+            }
+        }
     }
+
+    /**
+     * getter & setter
+     * */
+    fun setSize(size: Int) {
+        this.size = size
+    }
+
+    fun getSize(): Int = size
 }
