@@ -16,7 +16,7 @@ class Roulette(
         const val DEFAULT_DIVIDER_HEIGHT = 5f
     }
 
-    private var size = 0
+    private var rouletteElementSize = 0
     private var circleRadius = 0f
 
     private val circlePaint = Paint()
@@ -74,7 +74,7 @@ class Roulette(
 
         canvas?.drawCircle(centerX, centerY, circleRadius, circlePaint)
 
-        when (size) {
+        when (rouletteElementSize) {
             2 -> {
                 canvas?.drawLine(left.toFloat(), centerY, right.toFloat(), centerY, dividerPaint)
             }
@@ -84,9 +84,9 @@ class Roulette(
     /**
      * getter & setter
      * */
-    fun setSize(size: Int) {
-        this.size = size
+    fun setRouletteElementSize(size: Int) {
+        this.rouletteElementSize = size
     }
 
-    fun getSize(): Int = size
+    fun getRouletteElementSize(): Int = rouletteElementSize
 }
