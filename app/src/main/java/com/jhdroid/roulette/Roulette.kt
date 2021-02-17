@@ -93,12 +93,10 @@ class Roulette(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        val centerY = height / 2f
-
         val rectLeft = left.toFloat() + paddingLeft + DEFAULT_PADDING
-        val rectRight = right.toFloat() - paddingRight - DEFAULT_PADDING
-        val rectTop = ((centerY + top.toFloat()) / 2f) + paddingTop + DEFAULT_PADDING
-        val rectBottom = ((centerY + bottom.toFloat()) / 2f) - paddingBottom - DEFAULT_PADDING
+        val rectRight = right - paddingRight - DEFAULT_PADDING
+        val rectTop = top.toFloat() + paddingTop + DEFAULT_PADDING
+        val rectBottom = right - paddingBottom - DEFAULT_PADDING
 
         val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
 
