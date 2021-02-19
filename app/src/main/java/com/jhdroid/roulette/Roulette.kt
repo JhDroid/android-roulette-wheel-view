@@ -107,7 +107,14 @@ class Roulette @JvmOverloads constructor(
                 val medianAngle = (startAngle + sweepAngle / 2f) * Math.PI / 180f
                 val x = (centerX + (radius * cos(medianAngle))).toFloat()
                 val y = (centerY + (radius * sin(medianAngle))).toFloat() + DEFAULT_PADDING
-                canvas?.drawText(rouletteDataList[i], x, y, textPaint)
+
+                val text = if (i > rouletteDataList.size - 1 && rouletteSize > rouletteDataList.size) {
+                    "empty"
+                } else {
+                    rouletteDataList[i]
+                }
+
+                canvas?.drawText(text, x, y, textPaint)
             }
         } else throw RuntimeException("size out of roulette")
     }
