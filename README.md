@@ -1,4 +1,4 @@
-# Android OpenCSV Sample Project
+# Android Roulette View Project
 
 ### 소개
 * Android Roulette View
