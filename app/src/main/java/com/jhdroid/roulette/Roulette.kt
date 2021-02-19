@@ -75,33 +75,6 @@ class Roulette @JvmOverloads constructor(
         shapeColors = resources.getStringArray(R.array.shape_colors)
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        setMeasuredDimension(measureDimension(widthMeasureSpec, true), measureDimension(heightMeasureSpec, false))
-    }
-
-    private fun measureDimension(measureSpec: Int, isWidth: Boolean): Int {
-        var result: Int
-        val specMode = MeasureSpec.getMode(measureSpec)
-        val specSize = MeasureSpec.getSize(measureSpec)
-
-        if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize
-        } else {
-            val padding = if (isWidth) paddingLeft + paddingRight else paddingTop + paddingBottom
-            result = if (isWidth) suggestedMinimumWidth else suggestedMinimumHeight
-            result += padding
-            if (specMode == MeasureSpec.AT_MOST) {
-                result = if (isWidth) {
-                    result.coerceAtLeast(specSize)
-                } else {
-                    result.coerceAtMost(specSize)
-                }
-            }
-        }
-
-        return result
-    }
-
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -113,19 +86,19 @@ class Roulette @JvmOverloads constructor(
 
         val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
 
-        canvas?.drawArc(rectF, 0f, 360f, true, strokePaint)
-
-        drawRoulette(canvas, rectF, rouletteSize)
+        drawRoulette(canvas, rectF)
     }
 
-    private fun drawRoulette(canvas: Canvas?, rectF: RectF, size: Int) {
-        if (size in 2..8) {
+    private fun drawRoulette(canvas: Canvas?, rectF: RectF) {
+        canvas?.drawArc(rectF, 0f, 360f, false, strokePaint)
+
+        if (rouletteSize in 2..8) {
             val sweepAngle = 360f / rouletteSize.toFloat()
             val centerX = (rectF.left + rectF.right) / 2
             val centerY = (rectF.top + rectF.bottom) / 2
             val radius = (rectF.right - rectF.left) / 2 * 0.5
 
-            for (i in 0 until size) {
+            for (i in 0 until rouletteSize) {
                 fillPaint.color = Color.parseColor(shapeColors[i])
 
                 val startAngle = if (i == 0) 0f else sweepAngle * i
