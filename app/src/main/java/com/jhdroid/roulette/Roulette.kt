@@ -108,8 +108,8 @@ class Roulette @JvmOverloads constructor(
 
         val rectLeft = left.toFloat() + paddingLeft + DEFAULT_PADDING
         val rectRight = right - paddingRight - DEFAULT_PADDING
-        val rectTop = top.toFloat() + paddingTop + DEFAULT_PADDING
-        val rectBottom = right - paddingBottom - DEFAULT_PADDING
+        val rectTop = height / 2f - rectRight / 2f + paddingTop + DEFAULT_PADDING
+        val rectBottom = height / 2f + rectRight / 2f - paddingRight - DEFAULT_PADDING
 
         val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
 
@@ -123,7 +123,7 @@ class Roulette @JvmOverloads constructor(
             val sweepAngle = 360f / rouletteSize.toFloat()
             val centerX = (rectF.left + rectF.right) / 2
             val centerY = (rectF.top + rectF.bottom) / 2
-            val radius = (rectF.right - rectF.left) / 2 * 0.65
+            val radius = (rectF.right - rectF.left) / 2 * 0.5
 
             for (i in 0 until size) {
                 fillPaint.color = Color.parseColor(shapeColors[i])
@@ -132,9 +132,9 @@ class Roulette @JvmOverloads constructor(
                 canvas?.drawArc(rectF, startAngle, sweepAngle, true, fillPaint)
 
                 val medianAngle = (startAngle + sweepAngle / 2f) * Math.PI / 180f
-
-                canvas?.drawText(rouletteDataList[i], (centerX + (radius * cos(medianAngle))).toFloat(),
-                        (centerY + (radius * sin(medianAngle))).toFloat(), textPaint)
+                val x = (centerX + (radius * cos(medianAngle))).toFloat()
+                val y = (centerY + (radius * sin(medianAngle))).toFloat() + DEFAULT_PADDING
+                canvas?.drawText(rouletteDataList[i], x, y, textPaint)
             }
         } else throw RuntimeException("size out of roulette")
     }
