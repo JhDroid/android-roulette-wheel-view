@@ -20,7 +20,7 @@ class Roulette @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     companion object {
-        const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 15f
+        const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 20f
         const val DEFAULT_PADDING = 20f
         const val DEFAULT_ROULETTE_SIZE = 2
         const val DEFAULT_TEXT_SIZE = 60f
@@ -122,6 +122,9 @@ class Roulette @JvmOverloads constructor(
 
                 canvas?.drawText(text, x, y, textPaint)
             }
+
+            fillPaint.color = Color.BLACK
+            canvas?.drawCircle(centerX, centerY, 15f, fillPaint)
         } else throw RuntimeException("size out of roulette")
     }
 
