@@ -28,11 +28,12 @@ class Roulette @JvmOverloads constructor(
 
     private var rouletteSize = 0
     private var rouletteDataList = listOf<String>()
+    private var shapeColors = arrayOf<String>()
+    private var rouletteTextSize = 0f
 
     private val strokePaint = Paint()
     private val fillPaint = Paint()
     private val textPaint = Paint()
-    private var shapeColors = arrayOf<String>()
 
     init {
         val typedArray = context.theme.obtainStyledAttributes(
@@ -52,6 +53,11 @@ class Roulette @JvmOverloads constructor(
             DEFAULT_ROULETTE_SIZE
         )
 
+        rouletteTextSize = typedArray.getDimension(
+            R.styleable.RouletteView_textSize,
+            DEFAULT_TEXT_SIZE
+        )
+
         typedArray.recycle()
 
         strokePaint.apply {
@@ -68,7 +74,7 @@ class Roulette @JvmOverloads constructor(
 
         textPaint.apply {
             color = Color.BLACK
-            textSize = DEFAULT_TEXT_SIZE
+            textSize = rouletteTextSize
             textAlign = Paint.Align.CENTER
         }
 
@@ -154,4 +160,11 @@ class Roulette @JvmOverloads constructor(
     }
 
     fun getRouletteDataList(): List<String> = rouletteDataList
+
+    fun setRouletteTextSize(textSize: Float) {
+        rouletteTextSize = textSize
+        invalidate()
+    }
+
+    fun getRouletteTextSize(): Float = rouletteTextSize
 }

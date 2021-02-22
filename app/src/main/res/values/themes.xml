@@ -17,5 +17,6 @@
     <declare-styleable name="RouletteView">
         <attr name="circleStrokeColor" format="reference|color"/>
         <attr name="rouletteSize" format="integer"/>
+        <attr name="textSize" format="reference|dimension"/>
     </declare-styleable>
 </resources>
