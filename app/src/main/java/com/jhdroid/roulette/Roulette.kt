@@ -22,7 +22,7 @@ class Roulette @JvmOverloads constructor(
     companion object {
         const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 20f
         const val DEFAULT_PADDING = 20f
-        const val DEFAULT_ROULETTE_SIZE = 2
+        const val DEFAULT_ROULETTE_SIZE = 8
         const val DEFAULT_TEXT_SIZE = 60f
     }
 
@@ -114,12 +114,7 @@ class Roulette @JvmOverloads constructor(
                 val x = (centerX + (radius * cos(medianAngle))).toFloat()
                 val y = (centerY + (radius * sin(medianAngle))).toFloat() + DEFAULT_PADDING
 
-                val text = if (i > rouletteDataList.size - 1 && rouletteSize > rouletteDataList.size) {
-                    "empty"
-                } else {
-                    rouletteDataList[i]
-                }
-
+                val text = if (i > rouletteDataList.size - 1)  "empty" else rouletteDataList[i]
                 canvas?.drawText(text, x, y, textPaint)
             }
 
