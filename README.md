@@ -1,7 +1,7 @@
-# Android Roulette View Project
+# Android Roulette Wheel View Project
 
 ### 소개
-* Android Roulette View
+* Android Roulette Wheel View
 ### sample
 ![roulette2_2](https://user-images.githubusercontent.com/52662641/108828435-2ce6b600-760a-11eb-98ff-5b0cdf350f7d.gif)
 
