@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import io.reactivex.Single
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -123,16 +124,54 @@ class Roulette @JvmOverloads constructor(
         } else throw RuntimeException("size out of roulette")
     }
 
-    fun rotateRoulette(toDegrees: Float, duration: Long) {
+    fun rotateRoulette(toDegrees: Float, duration: Long, rouletteListener: RouletteListener?) {
+        val animListener = object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+            override fun onAnimationStart(animation: Animation?) {}
+
+            override fun onAnimationEnd(animation: Animation?) {
+                rouletteListener?.onRotateAnimationEnd("Rotate Result")
+            }
+        }
+
         val rotateAnim = RotateAnimation(
-            0f, toDegrees,
-            Animation.RELATIVE_TO_SELF, 0.5f,
-            Animation.RELATIVE_TO_SELF, 0.5f
-        )
-        rotateAnim.duration = duration
-        rotateAnim.fillAfter = true
+                0f, toDegrees,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        ).apply {
+            setDuration(duration)
+            fillAfter = true
+            setAnimationListener(animListener)
+        }
 
         startAnimation(rotateAnim)
+    }
+
+    fun rotateRoulette(toDegrees: Float, duration: Long): Single<String> {
+        return Single.create {
+            val animListener = object : Animation.AnimationListener {
+                override fun onAnimationRepeat(animation: Animation?) {}
+
+                override fun onAnimationStart(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    it.onSuccess("Rotate Result")
+                }
+            }
+
+            val rotateAnim = RotateAnimation(
+                0f, toDegrees,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+            ).apply {
+                setDuration(duration)
+                fillAfter = true
+                setAnimationListener(animListener)
+            }
+
+            startAnimation(rotateAnim)
+        }
     }
 
     /**
