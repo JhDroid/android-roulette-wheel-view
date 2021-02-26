@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     fun rotateRoulette() {
         val rouletteListener = object : RouletteListener {
             override fun onRotateAnimationStart() {
-                binding.rotateResult.text = ""
+                binding.rotateResult.text = "Result : "
             }
 
             override fun onRotateAnimationEnd(result: String) {

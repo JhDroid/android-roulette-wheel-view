@@ -131,7 +131,9 @@ class Roulette @JvmOverloads constructor(
         val animListener = object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
 
-            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationStart(animation: Animation?) {
+                rouletteListener?.onRotateAnimationStart()
+            }
 
             override fun onAnimationEnd(animation: Animation?) {
                 rouletteListener?.onRotateAnimationEnd(getRouletteRotateResult(toDegrees))
