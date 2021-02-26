@@ -3,7 +3,7 @@
 ### 소개
 * Android Roulette Wheel View
 ### sample
-![roulette2_2](https://user-images.githubusercontent.com/52662641/108828435-2ce6b600-760a-11eb-98ff-5b0cdf350f7d.gif)
+![roulette_sample_image](https://user-images.githubusercontent.com/52662641/109315777-3d0ec780-788e-11eb-8da5-1ce728b8b57e.gif)
 
 * 자세한 내용은 블로그를 확인해주세요.
     * https://jhdroid.tistory.com/23?category=919493
