@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.jhdroid.roulette.databinding.ActivityMainBinding
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,22 +16,45 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.activity = this
 
-        val rouletteData = listOf("JhDroid", "Android")
+        val rouletteData = listOf("JhDroid", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
 
         binding.roulette.apply {
-            setRouletteSize(2)
+            setRouletteSize(8)
+            binding.rouletteSizeTv.text = getRouletteSize().toString()
             setRouletteDataList(rouletteData)
         }
     }
 
     fun rotateRoulette() {
-        val toDegrees = (2000..10000).random().toFloat()
-        binding.roulette.rotateRoulette(toDegrees, 4000)
+        val rouletteListener = object : RouletteListener {
+            override fun onRotateAnimationStart() {
+                binding.rotateResult.text = ""
+            }
+
+            override fun onRotateAnimationEnd(result: String) {
+                binding.rotateResult.text = "Result : $result"
+            }
+        }
+
+        binding.roulette.rotateRoulette(3, 10, 4000, rouletteListener)
+    }
+
+    fun rotateRouletteRx() {
+        binding.roulette
+            .rotateRoulette(3, 10, 4000)
+            .subscribe(object : SingleObserver<String> {
+                override fun onSuccess(t: String) {
+                    binding.rotateResult.text = "Result : $t"
+                }
+
+                override fun onSubscribe(d: Disposable) {}
+
+                override fun onError(e: Throwable) {}
+            })
     }
 
     fun plusRouletteSize() {
         var rouletteSize = binding.roulette.getRouletteSize()
-
         if (rouletteSize == 8) return
 
         binding.roulette.setRouletteSize(++rouletteSize)
@@ -38,7 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     fun minusRouletteSize() {
         var rouletteSize = binding.roulette.getRouletteSize()
-
         if (rouletteSize == 2) return
 
         binding.roulette.setRouletteSize(--rouletteSize)
