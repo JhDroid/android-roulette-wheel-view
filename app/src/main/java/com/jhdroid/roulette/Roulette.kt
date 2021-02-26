@@ -126,7 +126,8 @@ class Roulette @JvmOverloads constructor(
 
     fun rotateRoulette(minCount: Int, maxCount: Int,
                        duration: Long, rotateListener: RotateListener?) {
-        val toDegrees = getRandomDegrees(minCount, maxCount)
+        val randomDegrees = (1000..10000).random().toFloat()
+        val toDegrees = 360 * (minCount..maxCount).random() + randomDegrees
 
         val animListener = object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
@@ -136,7 +137,7 @@ class Roulette @JvmOverloads constructor(
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-                rotateListener?.onRotateEnd(getRouletteRotateResult(toDegrees))
+                rotateListener?.onRotateEnd(getRouletteRotateResult(randomDegrees))
             }
         }
 
@@ -155,15 +156,18 @@ class Roulette @JvmOverloads constructor(
 
     fun rotateRoulette(minCount: Int, maxCount: Int, duration: Long): Single<String> {
         return Single.create {
-            val toDegrees = getRandomDegrees(minCount, maxCount)
+            val randomDegrees = (1000..10000).random().toFloat()
+            val toDegrees = 360 * (minCount..maxCount).random() + randomDegrees
 
             val animListener = object : Animation.AnimationListener {
                 override fun onAnimationRepeat(animation: Animation?) {}
 
-                override fun onAnimationStart(animation: Animation?) {}
+                override fun onAnimationStart(animation: Animation?) {
+                    it.onSuccess("")
+                }
 
                 override fun onAnimationEnd(animation: Animation?) {
-                    it.onSuccess(getRouletteRotateResult(toDegrees))
+                    it.onSuccess(getRouletteRotateResult(randomDegrees))
                 }
             }
 
@@ -181,13 +185,9 @@ class Roulette @JvmOverloads constructor(
         }
     }
 
-    private fun getRandomDegrees(minCount: Int, maxCount: Int): Float {
-        return 360 * (minCount..maxCount).random() + (1000..10000).random().toFloat()
-    }
-
     private fun getRouletteRotateResult(degrees: Float): String {
         val divAngle = degrees % 360
-        val result = if (divAngle < 270) 270 - divAngle else divAngle - 270
+        val result = if (divAngle > 270) 360 - (divAngle - 270) else 270 - divAngle
         for (i in 1..rouletteSize) {
             if (result < (360 / rouletteSize) * i) {
                 return rouletteDataList[i - 1]
