@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun rotateRoulette() {
-        val rouletteListener = object : RouletteListener {
-            override fun onRotateAnimationStart() {
+        val rouletteListener = object : RotateListener {
+            override fun onRotateStart() {
                 binding.rotateResult.text = "Result : "
             }
 
-            override fun onRotateAnimationEnd(result: String) {
+            override fun onRotateEnd(result: String) {
                 binding.rotateResult.text = "Result : $result"
             }
         }

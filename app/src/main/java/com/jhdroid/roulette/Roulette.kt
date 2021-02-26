@@ -125,18 +125,18 @@ class Roulette @JvmOverloads constructor(
     }
 
     fun rotateRoulette(minCount: Int, maxCount: Int,
-                       duration: Long, rouletteListener: RouletteListener?) {
+                       duration: Long, rotateListener: RotateListener?) {
         val toDegrees = getRandomDegrees(minCount, maxCount)
 
         val animListener = object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
 
             override fun onAnimationStart(animation: Animation?) {
-                rouletteListener?.onRotateAnimationStart()
+                rotateListener?.onRotateStart()
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-                rouletteListener?.onRotateAnimationEnd(getRouletteRotateResult(toDegrees))
+                rotateListener?.onRotateEnd(getRouletteRotateResult(toDegrees))
             }
         }
 
