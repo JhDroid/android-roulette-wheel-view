@@ -23,7 +23,7 @@ class Roulette @JvmOverloads constructor(
     companion object {
         const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 20f
         const val DEFAULT_PADDING = 20f
-        const val DEFAULT_ROULETTE_SIZE = 8
+        const val DEFAULT_ROULETTE_SIZE = 6
         const val DEFAULT_TEXT_SIZE = 60f
     }
 
@@ -124,14 +124,17 @@ class Roulette @JvmOverloads constructor(
         } else throw RuntimeException("size out of roulette")
     }
 
-    fun rotateRoulette(toDegrees: Float, duration: Long, rouletteListener: RouletteListener?) {
+    fun rotateRoulette(minCount: Int, maxCount: Int,
+                       duration: Long, rouletteListener: RouletteListener?) {
+        val toDegrees = getRandomDegrees(minCount, maxCount)
+
         val animListener = object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
 
             override fun onAnimationStart(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
-                rouletteListener?.onRotateAnimationEnd("Rotate Result")
+                rouletteListener?.onRotateAnimationEnd(getRouletteRotateResult(toDegrees))
             }
         }
 
@@ -148,15 +151,17 @@ class Roulette @JvmOverloads constructor(
         startAnimation(rotateAnim)
     }
 
-    fun rotateRoulette(toDegrees: Float, duration: Long): Single<String> {
+    fun rotateRoulette(minCount: Int, maxCount: Int, duration: Long): Single<String> {
         return Single.create {
+            val toDegrees = getRandomDegrees(minCount, maxCount)
+
             val animListener = object : Animation.AnimationListener {
                 override fun onAnimationRepeat(animation: Animation?) {}
 
                 override fun onAnimationStart(animation: Animation?) {}
 
                 override fun onAnimationEnd(animation: Animation?) {
-                    it.onSuccess("Rotate Result")
+                    it.onSuccess(getRouletteRotateResult(toDegrees))
                 }
             }
 
@@ -172,6 +177,22 @@ class Roulette @JvmOverloads constructor(
 
             startAnimation(rotateAnim)
         }
+    }
+
+    private fun getRandomDegrees(minCount: Int, maxCount: Int): Float {
+        return 360 * (minCount..maxCount).random() + (1000..10000).random().toFloat()
+    }
+
+    private fun getRouletteRotateResult(degrees: Float): String {
+        val divAngle = degrees % 360
+        val result = if (divAngle < 270) 270 - divAngle else divAngle - 270
+        for (i in 1..rouletteSize) {
+            if (result < (360 / rouletteSize) * i) {
+                return rouletteDataList[i - 1]
+            }
+        }
+
+        return ""
     }
 
     /**
