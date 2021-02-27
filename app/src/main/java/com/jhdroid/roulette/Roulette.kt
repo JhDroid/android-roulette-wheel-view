@@ -190,6 +190,10 @@ class Roulette @JvmOverloads constructor(
         val result = if (divAngle > 270) 360 - (divAngle - 270) else 270 - divAngle
         for (i in 1..rouletteSize) {
             if (result < (360 / rouletteSize) * i) {
+                if (i - 1 >= rouletteDataList.size) {
+                    return "empty"
+                }
+
                 return rouletteDataList[i - 1]
             }
         }
