@@ -36,12 +36,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.roulette.rotateRoulette(3, 10, 4000, rouletteListener)
+        val toDegrees = (2000..10000).random().toFloat()
+        binding.roulette.rotateRoulette(toDegrees, 4000, rouletteListener)
     }
 
     fun rotateRouletteRx() {
+        val toDegrees = (2000..10000).random().toFloat()
+
         binding.roulette
-            .rotateRoulette(3, 10, 4000)
+            .rotateRoulette(toDegrees, 4000)
             .subscribe(object : SingleObserver<String> {
                 override fun onSuccess(t: String) {
                     binding.rotateResultTv.text = "Result : $t"
