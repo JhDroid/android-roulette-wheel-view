@@ -177,10 +177,10 @@ class Roulette @JvmOverloads constructor(
     }
 
     private fun getRouletteRotateResult(degrees: Float): String {
-        val divAngle = degrees % 360
-        val result = if (divAngle > 270) 360 - (divAngle - 270) else 270 - divAngle
+        val moveDegrees = degrees % 360
+        val resultAngle = if (moveDegrees > 270) 360 - moveDegrees + 270 else 270 - moveDegrees
         for (i in 1..rouletteSize) {
-            if (result < (360 / rouletteSize) * i) {
+            if (resultAngle < (360 / rouletteSize) * i) {
                 if (i - 1 >= rouletteDataList.size) {
                     return "empty"
                 }
