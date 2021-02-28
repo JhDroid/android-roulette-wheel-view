@@ -124,10 +124,10 @@ class Roulette @JvmOverloads constructor(
         } else throw RuntimeException("size out of roulette")
     }
 
-    fun rotateRoulette(minCount: Int, maxCount: Int,
+    fun rotateRoulette(minRotationCount: Int, maxRotationCount: Int,
                        duration: Long, rotateListener: RotateListener?) {
         val randomDegrees = (1000..10000).random().toFloat()
-        val toDegrees = 360 * (minCount..maxCount).random() + randomDegrees
+        val toDegrees = 360 * (minRotationCount..maxRotationCount).random() + randomDegrees
 
         val animListener = object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
@@ -154,10 +154,10 @@ class Roulette @JvmOverloads constructor(
         startAnimation(rotateAnim)
     }
 
-    fun rotateRoulette(minCount: Int, maxCount: Int, duration: Long): Single<String> {
+    fun rotateRoulette(minRotationCount: Int, maxRotationCount: Int, duration: Long): Single<String> {
         return Single.create {
             val randomDegrees = (1000..10000).random().toFloat()
-            val toDegrees = 360 * (minCount..maxCount).random() + randomDegrees
+            val toDegrees = 360 * (minRotationCount..maxRotationCount).random() + randomDegrees
 
             val animListener = object : Animation.AnimationListener {
                 override fun onAnimationRepeat(animation: Animation?) {}
