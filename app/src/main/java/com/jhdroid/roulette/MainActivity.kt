@@ -28,11 +28,11 @@ class MainActivity : AppCompatActivity() {
     fun rotateRoulette() {
         val rouletteListener = object : RotateListener {
             override fun onRotateStart() {
-                binding.rotateResult.text = "Result : "
+                binding.rotateResultTv.text = "Result : "
             }
 
             override fun onRotateEnd(result: String) {
-                binding.rotateResult.text = "Result : $result"
+                binding.rotateResultTv.text = "Result : $result"
             }
         }
 
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             .rotateRoulette(3, 10, 4000)
             .subscribe(object : SingleObserver<String> {
                 override fun onSuccess(t: String) {
-                    binding.rotateResult.text = "Result : $t"
+                    binding.rotateResultTv.text = "Result : $t"
                 }
 
                 override fun onSubscribe(d: Disposable) {}
