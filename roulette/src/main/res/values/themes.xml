@@ -18,5 +18,6 @@
         <attr name="circleStrokeColor" format="reference|color"/>
         <attr name="rouletteSize" format="integer"/>
         <attr name="textSize" format="reference|dimension"/>
+        <attr name="emptyMessage" format="string"/>
     </declare-styleable>
 </resources>

@@ -19,10 +19,12 @@ class Roulette @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+
     private var rouletteSize = 0
     private var rouletteDataList = listOf<String>()
     private var shapeColors = arrayOf<String>()
     private var rouletteTextSize = 0f
+    private var emptyMessage = ""
 
     private val strokePaint = Paint()
     private val fillPaint = Paint()
@@ -50,6 +52,10 @@ class Roulette @JvmOverloads constructor(
             R.styleable.RouletteView_textSize,
             Constant.DEFAULT_TEXT_SIZE
         )
+
+        emptyMessage = typedArray.getString(
+            R.styleable.RouletteView_emptyMessage
+        ) ?: Constant.DEFAULT_EMPTY_MESSAGE
 
         typedArray.recycle()
 
@@ -107,7 +113,7 @@ class Roulette @JvmOverloads constructor(
                 val x = (centerX + (radius * cos(medianAngle))).toFloat()
                 val y = (centerY + (radius * sin(medianAngle))).toFloat() + Constant.DEFAULT_PADDING
 
-                val text = if (i > rouletteDataList.size - 1)  "empty" else rouletteDataList[i]
+                val text = if (i > rouletteDataList.size - 1)  emptyMessage else rouletteDataList[i]
                 canvas?.drawText(text, x, y, textPaint)
             }
 
@@ -174,7 +180,7 @@ class Roulette @JvmOverloads constructor(
         for (i in 1..rouletteSize) {
             if (resultAngle < (360 / rouletteSize) * i) {
                 if (i - 1 >= rouletteDataList.size) {
-                    return "empty"
+                    return emptyMessage
                 }
 
                 return rouletteDataList[i - 1]
@@ -214,4 +220,11 @@ class Roulette @JvmOverloads constructor(
     }
 
     fun getRouletteTextSize(): Float = rouletteTextSize
+
+    fun setEmptyMessage(emptyMessage: String) {
+        this.emptyMessage = emptyMessage
+        invalidate()
+    }
+
+    fun getEmptyMessage(): String = emptyMessage
 }
