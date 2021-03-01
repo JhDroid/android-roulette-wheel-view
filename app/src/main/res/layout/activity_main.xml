@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toStartOf="@+id/roulette_size_tv"
             app:layout_constraintTop_toTopOf="@+id/roulette_size_tv" />
 
-        <com.jhdroid.roulette.Roulette
+        <com.jhdroid.view.Roulette
             android:id="@+id/roulette"
             android:layout_width="wrap_content"
             android:layout_height="0dp"

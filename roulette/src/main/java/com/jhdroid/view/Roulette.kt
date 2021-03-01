@@ -1,4 +1,4 @@
-package com.jhdroid.roulette
+package com.jhdroid.view
 
 import android.annotation.SuppressLint
 import android.content.Context

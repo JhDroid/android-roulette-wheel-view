@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.jhdroid.roulette.databinding.ActivityMainBinding
+import com.jhdroid.view.RotateListener
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 

@@ -1,4 +1,4 @@
-package com.jhdroid.roulette
+package com.jhdroid.view
 
 interface RotateListener {
     fun onRotateStart()
