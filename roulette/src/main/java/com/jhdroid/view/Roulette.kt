@@ -19,14 +19,6 @@ class Roulette @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
-
-    companion object {
-        const val DEFAULT_CIRCLE_BORDER_LINE_HEIGHT = 20f
-        const val DEFAULT_PADDING = 20f
-        const val DEFAULT_ROULETTE_SIZE = 6
-        const val DEFAULT_TEXT_SIZE = 60f
-    }
-
     private var rouletteSize = 0
     private var rouletteDataList = listOf<String>()
     private var shapeColors = arrayOf<String>()
@@ -51,12 +43,12 @@ class Roulette @JvmOverloads constructor(
 
         rouletteSize = typedArray.getInt(
             R.styleable.RouletteView_rouletteSize,
-            DEFAULT_ROULETTE_SIZE
+            Constant.DEFAULT_ROULETTE_SIZE
         )
 
         rouletteTextSize = typedArray.getDimension(
             R.styleable.RouletteView_textSize,
-            DEFAULT_TEXT_SIZE
+            Constant.DEFAULT_TEXT_SIZE
         )
 
         typedArray.recycle()
@@ -64,7 +56,7 @@ class Roulette @JvmOverloads constructor(
         strokePaint.apply {
             color = colorStrokeColor
             style = Paint.Style.STROKE
-            strokeWidth = DEFAULT_CIRCLE_BORDER_LINE_HEIGHT
+            strokeWidth = Constant.DEFAULT_CIRCLE_BORDER_LINE_HEIGHT
             isAntiAlias = true
         }
 
@@ -86,10 +78,10 @@ class Roulette @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        val rectLeft = left.toFloat() + paddingLeft + DEFAULT_PADDING
-        val rectRight = right - paddingRight - DEFAULT_PADDING
-        val rectTop = height / 2f - rectRight / 2f + paddingTop + DEFAULT_PADDING
-        val rectBottom = height / 2f + rectRight / 2f - paddingRight - DEFAULT_PADDING
+        val rectLeft = left + paddingLeft + Constant.DEFAULT_PADDING
+        val rectRight = right - paddingRight - Constant.DEFAULT_PADDING
+        val rectTop = height / 2f - rectRight / 2f + paddingTop + Constant.DEFAULT_PADDING
+        val rectBottom = height / 2f + rectRight / 2f - paddingRight -Constant. DEFAULT_PADDING
 
         val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
 
@@ -113,7 +105,7 @@ class Roulette @JvmOverloads constructor(
 
                 val medianAngle = (startAngle + sweepAngle / 2f) * Math.PI / 180f
                 val x = (centerX + (radius * cos(medianAngle))).toFloat()
-                val y = (centerY + (radius * sin(medianAngle))).toFloat() + DEFAULT_PADDING
+                val y = (centerY + (radius * sin(medianAngle))).toFloat() + Constant.DEFAULT_PADDING
 
                 val text = if (i > rouletteDataList.size - 1)  "empty" else rouletteDataList[i]
                 canvas?.drawText(text, x, y, textPaint)
