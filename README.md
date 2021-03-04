@@ -9,7 +9,7 @@
 
 ## 사용
 
-* Project Gradle
+### Project Gradle
 ```groovy
 allprojects {
     repositories {
@@ -17,16 +17,16 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
-```
+```  
 
-* App Gradle
+### App Gradle
 ```groovy
 dependencies {
     implementation 'com.github.User:Repo:Tag'
 }
-```
+```  
 
-* layout
+### layout
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout
     <com.jhdroid.view.Roulette
@@ -35,9 +35,9 @@ dependencies {
         android:layout_height="0dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
-* 꼭! `height`속성은 `match_parent`(ConstraintLayout은 `0dp`)설정해야 합니다.
+* 꼭! `height`속성은 `match_parent`(ConstraintLayout은 `0dp`)설정해야 합니다.  
 
-* Activity
+### Activity
 ```kotlin
 val rouletteData = listOf("JhDroid", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
 
@@ -45,7 +45,7 @@ roulette.apply {
     setRouletteSize(8)
     setRouletteDataList(rouletteData)
 }
-```
+```  
 
 * rotate result return
 1. Listener를 사용한 리턴
@@ -65,19 +65,17 @@ fun rotateRoulette() {
     val toDegrees = (2000..10000).random().toFloat()
     roulette.rotateRoulette(toDegrees, 4000, rouletteListener)
 }
-```
-
----
+```  
 
 ## 뷰 적용 및 회전 예
-![roulette_sample_image](https://user-images.githubusercontent.com/52662641/109980681-8013e380-7d43-11eb-9b4b-6419c2056b47.gif)
-
----
+![roulette_sample_image](https://user-images.githubusercontent.com/52662641/109980681-8013e380-7d43-11eb-9b4b-6419c2056b47.gif)  
+  
 
 ## 남은 과제
 1. 12시 방향에 화살표 추가 (이미지 or 그리기)
 2. 룰렛 뷰 최소 길이 설정 후 wrap_content 설정해도 적용가능하도록 수정 (지금은 match_parent 만..)
-3. 사용자 설정을 위한 속성 추가 (생각나는 부분 계속 추가 예정)
+3. 사용자 설정을 위한 속성 추가 (생각나는 부분 계속 추가 예정)  
+
 
 ## 기타
 * 개발 과정은 블로그를 확인해주세요!
