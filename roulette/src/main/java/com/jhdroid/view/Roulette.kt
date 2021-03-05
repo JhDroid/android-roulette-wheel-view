@@ -25,6 +25,8 @@ class Roulette @JvmOverloads constructor(
     private var shapeColors = arrayOf<String>()
     private var rouletteTextSize = 0f
     private var emptyMessage = ""
+    private var textColor = Color.BLACK
+    private var rouletteBorderLineColor = Color.BLACK
 
     private val strokePaint = Paint()
     private val fillPaint = Paint()
@@ -38,8 +40,13 @@ class Roulette @JvmOverloads constructor(
             0
         )
 
-        val colorStrokeColor = typedArray.getColor(
-            R.styleable.RouletteView_circleStrokeColor,
+        rouletteBorderLineColor = typedArray.getColor(
+            R.styleable.RouletteView_rouletteBorderLineColor,
+            Color.BLACK
+        )
+
+        textColor = typedArray.getColor(
+            R.styleable.RouletteView_textColor,
             Color.BLACK
         )
 
@@ -60,7 +67,7 @@ class Roulette @JvmOverloads constructor(
         typedArray.recycle()
 
         strokePaint.apply {
-            color = colorStrokeColor
+            color = rouletteBorderLineColor
             style = Paint.Style.STROKE
             strokeWidth = Constant.DEFAULT_CIRCLE_BORDER_LINE_HEIGHT
             isAntiAlias = true
@@ -193,12 +200,12 @@ class Roulette @JvmOverloads constructor(
     /**
      * getter & setter
      * */
-    fun setCircleStrokeColor(color: Int) {
-        this.strokePaint.color = color
+    fun setRouletteBorderLineColor(borderLineColor: Int) {
+        this.rouletteBorderLineColor = borderLineColor
         invalidate()
     }
 
-    fun getCircleStrokeColor(): Int = this.strokePaint.color
+    fun getRouletteBorderLineColor(): Int = rouletteBorderLineColor
 
     fun setRouletteSize(size: Int) {
         this.rouletteSize = size
@@ -227,4 +234,11 @@ class Roulette @JvmOverloads constructor(
     }
 
     fun getEmptyMessage(): String = emptyMessage
+
+    fun setTextColor(textColor: Int) {
+        this.textColor = textColor
+        invalidate()
+    }
+
+    fun getTextColor(): Int = textColor
 }
