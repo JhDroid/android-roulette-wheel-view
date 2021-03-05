@@ -1,5 +1,7 @@
 # Android Roulette Wheel View Project
 
+<br/>
+
 ## 소개
 * Android Roulette Wheel View
 * 안드로이드에서 사용할 수 있는 룰렛 View 입니다.
@@ -17,15 +19,19 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
-```  
+```
+
 <br/><br/>
+
 ### App Gradle
 ```groovy
 dependencies {
     implementation 'com.github.User:Repo:Tag'
 }
-```  
+```
+
 <br/><br/>
+
 ### layout
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,8 +41,10 @@ dependencies {
         android:layout_height="0dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
-* 꼭! `height`속성은 `match_parent`(ConstraintLayout은 `0dp`)설정해야 합니다.  
+* 꼭! `height`속성은 `match_parent`(ConstraintLayout은 `0dp`)설정해야 합니다.
+
 <br/><br/>
+
 ### Activity
 ```kotlin
 val rouletteData = listOf("JhDroid", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
@@ -45,9 +53,11 @@ roulette.apply {
     setRouletteSize(8)
     setRouletteDataList(rouletteData)
 }
-```  
+```
+
 <br/><br/>
-### rotate result return
+
+### Rotate result return
 1. Listener를 사용한 리턴
 ```kotlin
 fun rotateRoulette() {
@@ -71,6 +81,7 @@ fun rotateRoulette() {
 
 ## 뷰 적용 및 회전 예
 * 잠시 기다리면 git 이미지를 확인 가능합니다.
+<br/>
 ![roulette_sample_image](https://user-images.githubusercontent.com/52662641/109980681-8013e380-7d43-11eb-9b4b-6419c2056b47.gif)  
   
 <br/><br/>
