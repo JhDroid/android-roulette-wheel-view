@@ -27,6 +27,7 @@ class Roulette @JvmOverloads constructor(
     private var emptyMessage = ""
     private var textColor = Color.BLACK
     private var rouletteBorderLineColor = Color.BLACK
+    private var rouletteBorderLineWidth = 0f
 
     private val strokePaint = Paint()
     private val fillPaint = Paint()
@@ -43,6 +44,11 @@ class Roulette @JvmOverloads constructor(
         rouletteBorderLineColor = typedArray.getColor(
             R.styleable.RouletteView_rouletteBorderLineColor,
             Color.BLACK
+        )
+
+        rouletteBorderLineWidth = typedArray.getDimension(
+            R.styleable.RouletteView_rouletteBorderLineWidth,
+            Constant.DEFAULT_CIRCLE_BORDER_LINE_WIDTH
         )
 
         textColor = typedArray.getColor(
@@ -69,7 +75,7 @@ class Roulette @JvmOverloads constructor(
         strokePaint.apply {
             color = rouletteBorderLineColor
             style = Paint.Style.STROKE
-            strokeWidth = Constant.DEFAULT_CIRCLE_BORDER_LINE_HEIGHT
+            strokeWidth = rouletteBorderLineWidth
             isAntiAlias = true
         }
 
@@ -79,7 +85,7 @@ class Roulette @JvmOverloads constructor(
         }
 
         textPaint.apply {
-            color = Color.BLACK
+            color = textColor
             textSize = rouletteTextSize
             textAlign = Paint.Align.CENTER
         }
@@ -94,7 +100,7 @@ class Roulette @JvmOverloads constructor(
         val rectLeft = left + paddingLeft + Constant.DEFAULT_PADDING
         val rectRight = right - paddingRight - Constant.DEFAULT_PADDING
         val rectTop = height / 2f - rectRight / 2f + paddingTop + Constant.DEFAULT_PADDING
-        val rectBottom = height / 2f + rectRight / 2f - paddingRight -Constant. DEFAULT_PADDING
+        val rectBottom = height / 2f + rectRight / 2f - paddingRight - Constant. DEFAULT_PADDING
 
         val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
 
@@ -119,7 +125,6 @@ class Roulette @JvmOverloads constructor(
                 val medianAngle = (startAngle + sweepAngle / 2f) * Math.PI / 180f
                 val x = (centerX + (radius * cos(medianAngle))).toFloat()
                 val y = (centerY + (radius * sin(medianAngle))).toFloat() + Constant.DEFAULT_PADDING
-
                 val text = if (i > rouletteDataList.size - 1)  emptyMessage else rouletteDataList[i]
                 canvas?.drawText(text, x, y, textPaint)
             }
