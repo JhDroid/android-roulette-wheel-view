@@ -79,10 +79,8 @@ fun rotateRoulette() {
 
 <br/><br/>
 
-## 뷰 적용 및 회전 예
-* 잠시 기다리면 git 이미지를 확인 가능합니다.
-<br/>
-![roulette_sample_image](https://user-images.githubusercontent.com/52662641/109980681-8013e380-7d43-11eb-9b4b-6419c2056b47.gif)  
+## 뷰 적용 및 회전 예(잠시 기다리면 이미지가 나옵니다.)
+![roulette_sample_image](https://user-images.githubusercontent.com/52662641/110210350-97360b00-7ed4-11eb-8496-91cf588e5041.gif)
   
 <br/><br/>
 
