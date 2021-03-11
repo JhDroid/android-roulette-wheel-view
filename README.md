@@ -4,8 +4,10 @@
 
 ## 소개
 * Android Roulette Wheel View
-* 안드로이드에서 사용할 수 있는 룰렛 View 입니다.
-* 회전 기능을 제공하고 결과를 리턴받을 수 있습니다.
+* 안드로이드에서 사용할 수 있는 룰렛 뷰 입니다.
+* 회전 기능을 제공하고 회전 후 결과를 리턴받을 수 있습니다.
+* 개발 과정은 블로그를 확인해주세요!
+    * https://jhdroid.tistory.com/category/Android%20Proejct/Roulette%20Wheel%20View
 
 <br/><br/>
 
@@ -26,7 +28,7 @@ allprojects {
 ### App Gradle
 ```groovy
 dependencies {
-    implementation ''com.github.JhDroid:android-roulette-wheel-view:1.0.0''
+    implementation 'com.github.JhDroid:android-roulette-wheel-view:1.0.0'
 }
 ```
 
@@ -87,10 +89,4 @@ fun rotateRoulette() {
 ## 남은 과제
 1. 12시 방향에 화살표 추가 (이미지 or 그리기)
 2. 룰렛 뷰 최소 길이 설정 후 wrap_content 설정해도 적용가능하도록 수정 (지금은 match_parent 만..)
-3. 사용자 설정을 위한 속성 추가 (생각나는 부분 계속 추가 예정)  
-
-<br/><br/>
-
-## 기타
-* 개발 과정은 블로그를 확인해주세요!
-    * https://jhdroid.tistory.com/category/Android%20Proejct/Roulette%20Wheel%20View
+3. 사용자 설정을 위한 속성 추가 (생각나는 부분 계속 추가 예정)
