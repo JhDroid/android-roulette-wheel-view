@@ -42,12 +42,12 @@ class Roulette @JvmOverloads constructor(
         )
 
         rouletteBorderLineColor = typedArray.getColor(
-            R.styleable.RouletteView_rouletteBorderLineColor,
+            R.styleable.RouletteView_backgroundLineColor,
             Color.BLACK
         )
 
         rouletteBorderLineWidth = typedArray.getDimension(
-            R.styleable.RouletteView_rouletteBorderLineWidth,
+            R.styleable.RouletteView_backgroundLineWidth,
             Constant.DEFAULT_CIRCLE_BORDER_LINE_WIDTH
         )
 

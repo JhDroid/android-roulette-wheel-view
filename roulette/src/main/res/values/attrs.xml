@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="RouletteView">
-        <attr name="rouletteBorderLineColor" format="reference|color"/>
+        <attr name="backgroundLineColor" format="reference|color"/>
+        <attr name="backgroundLineWidth" format="reference|dimension"/>
         <attr name="textColor" format="reference|color"/>
         <attr name="rouletteSize" format="integer"/>
         <attr name="textSize" format="reference|dimension"/>
         <attr name="emptyMessage" format="string"/>
-        <attr name="rouletteBorderLineWidth" format="reference|dimension"/>
     </declare-styleable>
 </resources>
