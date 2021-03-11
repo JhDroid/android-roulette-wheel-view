@@ -26,7 +26,7 @@ allprojects {
 ### App Gradle
 ```groovy
 dependencies {
-    implementation 'com.github.User:Repo:Tag'
+    implementation ''com.github.JhDroid:android-roulette-wheel-view:1.0.0''
 }
 ```
 
