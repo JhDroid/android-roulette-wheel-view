@@ -48,5 +48,5 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
 
-    implementation 'com.github.JhDroid:android-roulette-wheel-view:1.0.0'
+    implementation 'com.github.JhDroid:android-roulette-wheel-view:1.0.1'
 }
