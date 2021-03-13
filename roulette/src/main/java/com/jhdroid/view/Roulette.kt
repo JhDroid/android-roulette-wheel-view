@@ -23,8 +23,8 @@ class Roulette @JvmOverloads constructor(
     private var rouletteSize = 0
     private var rouletteDataList = listOf<String>()
     private var shapeColors = arrayOf<String>()
-    private var rouletteTextSize = 0f
     private var emptyMessage = ""
+    private var textSize = 0f
     private var textColor = Color.BLACK
     private var rouletteBorderLineColor = Color.BLACK
     private var rouletteBorderLineWidth = 0f
@@ -61,7 +61,7 @@ class Roulette @JvmOverloads constructor(
             Constant.DEFAULT_ROULETTE_SIZE
         )
 
-        rouletteTextSize = typedArray.getDimension(
+        textSize = typedArray.getDimension(
             R.styleable.RouletteView_textSize,
             Constant.DEFAULT_TEXT_SIZE
         )
@@ -86,7 +86,7 @@ class Roulette @JvmOverloads constructor(
 
         textPaint.apply {
             color = textColor
-            textSize = rouletteTextSize
+            this.textSize = textSize
             textAlign = Paint.Align.CENTER
         }
 
@@ -226,12 +226,12 @@ class Roulette @JvmOverloads constructor(
 
     fun getRouletteDataList(): List<String> = rouletteDataList
 
-    fun setRouletteTextSize(textSize: Float) {
-        rouletteTextSize = textSize
+    fun setTextSize(textSize: Float) {
+        this.textSize = textSize
         invalidate()
     }
 
-    fun getRouletteTextSize(): Float = rouletteTextSize
+    fun getTextSize(): Float = textSize
 
     fun setEmptyMessage(emptyMessage: String) {
         this.emptyMessage = emptyMessage
