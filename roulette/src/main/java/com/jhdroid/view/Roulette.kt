@@ -205,13 +205,6 @@ class Roulette @JvmOverloads constructor(
     /**
      * getter & setter
      * */
-    fun setRouletteBorderLineColor(borderLineColor: Int) {
-        this.rouletteBorderLineColor = borderLineColor
-        invalidate()
-    }
-
-    fun getRouletteBorderLineColor(): Int = rouletteBorderLineColor
-
     fun setRouletteSize(size: Int) {
         this.rouletteSize = size
         invalidate()
@@ -226,13 +219,6 @@ class Roulette @JvmOverloads constructor(
 
     fun getRouletteDataList(): List<String> = rouletteDataList
 
-    fun setTextSize(textSize: Float) {
-        this.textSize = textSize
-        invalidate()
-    }
-
-    fun getTextSize(): Float = textSize
-
     fun setEmptyMessage(emptyMessage: String) {
         this.emptyMessage = emptyMessage
         invalidate()
@@ -240,10 +226,31 @@ class Roulette @JvmOverloads constructor(
 
     fun getEmptyMessage(): String = emptyMessage
 
+    fun setTextSize(textSize: Float) {
+        this.textSize = textSize
+        invalidate()
+    }
+
+    fun getTextSize(): Float = textSize
+
     fun setTextColor(textColor: Int) {
         this.textColor = textColor
         invalidate()
     }
 
     fun getTextColor(): Int = textColor
+
+    fun setRouletteBorderLineColor(borderLineColor: Int) {
+        rouletteBorderLineColor = borderLineColor
+        invalidate()
+    }
+
+    fun getRouletteBorderLineColor(): Int = rouletteBorderLineColor
+
+    fun setRouletteBorderLineWidth(width: Float) {
+        rouletteBorderLineWidth = width
+        invalidate()
+    }
+
+    fun getRouletteBorderLineWidth(): Float = rouletteBorderLineWidth
 }
