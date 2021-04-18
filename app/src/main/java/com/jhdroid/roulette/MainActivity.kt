@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.jhdroid.roulette.databinding.ActivityMainBinding
 import com.jhdroid.view.RotateListener
-import io.reactivex.SingleObserver
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val compositeDisposable by lazy { CompositeDisposable() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,15 @@ class MainActivity : AppCompatActivity() {
             setRouletteSize(8)
             binding.rouletteSizeTv.text = getRouletteSize().toString()
             setRouletteDataList(rouletteData)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        with(compositeDisposable) {
+            clear()
+            dispose()
         }
     }
 
@@ -44,17 +54,13 @@ class MainActivity : AppCompatActivity() {
     fun rotateRouletteRx() {
         val toDegrees = (2000..10000).random().toFloat()
 
-        binding.roulette
+         binding.roulette
             .rotateRoulette(toDegrees, 4000)
-            .subscribe(object : SingleObserver<String> {
-                override fun onSuccess(t: String) {
-                    binding.rotateResultTv.text = "Result : $t"
-                }
-
-                override fun onSubscribe(d: Disposable) {}
-
-                override fun onError(e: Throwable) {}
-            })
+            .subscribe({ result ->
+                binding.rotateResultTv.text = "Result : $result"
+            }, { e ->
+                e.printStackTrace()
+            }).addTo(compositeDisposable)
     }
 
     fun plusRouletteSize() {
