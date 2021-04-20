@@ -148,9 +148,9 @@ class Roulette @JvmOverloads constructor(
         }
 
         val rotateAnim = RotateAnimation(
-                0f, toDegrees,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f
+            0f, toDegrees,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
         )
         rotateAnim.duration = duration
         rotateAnim.fillAfter = true
@@ -174,9 +174,9 @@ class Roulette @JvmOverloads constructor(
             }
 
             val rotateAnim = RotateAnimation(
-                    0f, toDegrees,
-                    Animation.RELATIVE_TO_SELF, 0.5f,
-                    Animation.RELATIVE_TO_SELF, 0.5f
+                0f, toDegrees,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
             )
             rotateAnim.duration = duration
             rotateAnim.fillAfter = true
