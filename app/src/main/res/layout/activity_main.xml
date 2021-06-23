@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="activity"
-            type="com.jhdroid.roulette.MainActivity" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +26,6 @@
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_plus_btn_48"
-            android:onClick="@{() -> activity.plusRouletteSize()}"
             app:layout_constraintBottom_toBottomOf="@+id/roulette_size_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/roulette_size_tv" />
@@ -54,7 +47,6 @@
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_minus_btn_48"
-            android:onClick="@{() -> activity.minusRouletteSize()}"
             app:layout_constraintBottom_toBottomOf="@+id/roulette_size_tv"
             app:layout_constraintEnd_toStartOf="@+id/roulette_size_tv"
             app:layout_constraintTop_toTopOf="@+id/roulette_size_tv" />
@@ -77,7 +69,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="rotate"
-            android:onClick="@{() -> activity.rotateRoulette()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

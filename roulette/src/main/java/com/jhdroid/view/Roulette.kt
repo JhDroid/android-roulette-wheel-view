@@ -24,7 +24,7 @@ class Roulette @JvmOverloads constructor(
     private var rouletteDataList = listOf<String>()
     private var shapeColors = arrayOf<String>()
     private var emptyMessage = ""
-    private var textSize = 0f
+    private var rouletteTextSize = 0f
     private var textColor = Color.BLACK
     private var rouletteBorderLineColor = Color.BLACK
     private var rouletteBorderLineWidth = 0f
@@ -61,7 +61,7 @@ class Roulette @JvmOverloads constructor(
             Constant.DEFAULT_ROULETTE_SIZE
         )
 
-        textSize = typedArray.getDimension(
+        rouletteTextSize = typedArray.getDimension(
             R.styleable.RouletteView_textSize,
             Constant.DEFAULT_TEXT_SIZE
         )
@@ -86,7 +86,7 @@ class Roulette @JvmOverloads constructor(
 
         textPaint.apply {
             color = textColor
-            this.textSize = textSize
+            textSize = rouletteTextSize
             textAlign = Paint.Align.CENTER
         }
 
@@ -134,6 +134,12 @@ class Roulette @JvmOverloads constructor(
         } else throw RuntimeException("size out of roulette")
     }
 
+    /**
+     * 룰렛 회전 함수
+     * @param toDegrees : 종료 각도(시작 각도 : 0)
+     * @param duration : 회전 시간
+     * @param rotateListener : 회전 애니메이션 시작, 종료 확인을 위한 리스너 (선택)
+     * */
     fun rotateRoulette(toDegrees: Float, duration: Long, rotateListener: RotateListener?) {
         val animListener = object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
@@ -159,35 +165,13 @@ class Roulette @JvmOverloads constructor(
         startAnimation(rotateAnim)
     }
 
-    fun rotateRoulette(toDegrees: Float, duration: Long): Single<String> {
-        return Single.create {
-            val animListener = object : Animation.AnimationListener {
-                override fun onAnimationRepeat(animation: Animation?) {}
-
-                override fun onAnimationStart(animation: Animation?) {
-                    it.onSuccess("")
-                }
-
-                override fun onAnimationEnd(animation: Animation?) {
-                    it.onSuccess(getRouletteRotateResult(toDegrees))
-                }
-            }
-
-            val rotateAnim = RotateAnimation(
-                0f, toDegrees,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f
-            )
-            rotateAnim.duration = duration
-            rotateAnim.fillAfter = true
-            rotateAnim.setAnimationListener(animListener)
-
-            startAnimation(rotateAnim)
-        }
-    }
-
-    private fun getRouletteRotateResult(degrees: Float): String {
-        val moveDegrees = degrees % 360
+    /**
+     * 룰레 회전 결과 리턴
+     * @param toDegrees : 회전 각도
+     * @return 회전 결과
+     * */
+    private fun getRouletteRotateResult(toDegrees: Float): String {
+        val moveDegrees = toDegrees % 360
         val resultAngle = if (moveDegrees > 270) 360 - moveDegrees + 270 else 270 - moveDegrees
         for (i in 1..rouletteSize) {
             if (resultAngle < (360 / rouletteSize) * i) {
@@ -226,12 +210,12 @@ class Roulette @JvmOverloads constructor(
 
     fun getEmptyMessage(): String = emptyMessage
 
-    fun setTextSize(textSize: Float) {
-        this.textSize = textSize
+    fun setRouletteTextSize(textSize: Float) {
+        rouletteTextSize = textSize
         invalidate()
     }
 
-    fun getTextSize(): Float = textSize
+    fun getRouletteTextSize(): Float = rouletteTextSize
 
     fun setTextColor(textColor: Int) {
         this.textColor = textColor
