@@ -2,9 +2,11 @@
     <declare-styleable name="RouletteView">
         <attr name="backgroundLineColor" format="reference|color"/>
         <attr name="backgroundLineWidth" format="reference|dimension"/>
-        <attr name="textColor" format="reference|color"/>
+
+        <attr name="rouletteTextColor" format="reference|color"/>
+        <attr name="rouletteTextSize" format="reference|dimension"/>
+
         <attr name="rouletteSize" format="integer"/>
-        <attr name="textSize" format="reference|dimension"/>
         <attr name="emptyMessage" format="string"/>
     </declare-styleable>
 </resources>

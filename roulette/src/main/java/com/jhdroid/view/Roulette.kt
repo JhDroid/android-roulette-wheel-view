@@ -20,17 +20,27 @@ class Roulette @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    // Roulette Attr
     private var rouletteSize = 0
     private var rouletteDataList = listOf<String>()
-    private var shapeColors = arrayOf<String>()
-    private var emptyMessage = ""
-    private var rouletteTextSize = 0f
-    private var textColor = Color.BLACK
+
     private var rouletteBorderLineColor = Color.BLACK
     private var rouletteBorderLineWidth = 0f
 
+    private var shapeColors = arrayOf<String>()
+
+    private var rouletteTextColor = Color.BLACK
+    private var rouletteTextSize = 0f
+    private var emptyMessage = ""
+
+    // Center Point Attr
+    private var centerPointColor = Color.BLACK
+    private var centerPointRadius = 0f
+
+    // Paint
     private val strokePaint = Paint()
     private val fillPaint = Paint()
+    private val centerPointPaint = Paint()
     private val textPaint = Paint()
 
     init {
@@ -51,8 +61,8 @@ class Roulette @JvmOverloads constructor(
             Constant.DEFAULT_CIRCLE_BORDER_LINE_WIDTH
         )
 
-        textColor = typedArray.getColor(
-            R.styleable.RouletteView_textColor,
+        rouletteTextColor = typedArray.getColor(
+            R.styleable.RouletteView_rouletteTextColor,
             Color.BLACK
         )
 
@@ -62,7 +72,7 @@ class Roulette @JvmOverloads constructor(
         )
 
         rouletteTextSize = typedArray.getDimension(
-            R.styleable.RouletteView_textSize,
+            R.styleable.RouletteView_rouletteTextSize,
             Constant.DEFAULT_TEXT_SIZE
         )
 
@@ -84,8 +94,13 @@ class Roulette @JvmOverloads constructor(
             isAntiAlias = true
         }
 
+        centerPointPaint.apply {
+            color = centerPointColor
+            isAntiAlias = true
+        }
+
         textPaint.apply {
-            color = textColor
+            color = rouletteTextColor
             textSize = rouletteTextSize
             textAlign = Paint.Align.CENTER
         }
@@ -108,6 +123,7 @@ class Roulette @JvmOverloads constructor(
     }
 
     private fun drawRoulette(canvas: Canvas?, rectF: RectF) {
+        // draw roulette border line
         canvas?.drawArc(rectF, 0f, 360f, false, strokePaint)
 
         if (rouletteSize in 2..8) {
@@ -119,9 +135,11 @@ class Roulette @JvmOverloads constructor(
             for (i in 0 until rouletteSize) {
                 fillPaint.color = Color.parseColor(shapeColors[i])
 
+                // draw roulette arc
                 val startAngle = if (i == 0) 0f else sweepAngle * i
                 canvas?.drawArc(rectF, startAngle, sweepAngle, true, fillPaint)
 
+                // draw roulette text
                 val medianAngle = (startAngle + sweepAngle / 2f) * Math.PI / 180f
                 val x = (centerX + (radius * cos(medianAngle))).toFloat()
                 val y = (centerY + (radius * sin(medianAngle))).toFloat() + Constant.DEFAULT_PADDING
@@ -129,8 +147,8 @@ class Roulette @JvmOverloads constructor(
                 canvas?.drawText(text, x, y, textPaint)
             }
 
-            fillPaint.color = Color.BLACK
-            canvas?.drawCircle(centerX, centerY, 15f, fillPaint)
+            // draw center point
+            canvas?.drawCircle(centerX, centerY, centerPointRadius, centerPointPaint)
         } else throw RuntimeException("size out of roulette")
     }
 
@@ -217,12 +235,12 @@ class Roulette @JvmOverloads constructor(
 
     fun getRouletteTextSize(): Float = rouletteTextSize
 
-    fun setTextColor(textColor: Int) {
-        this.textColor = textColor
+    fun setRouletteTextColor(textColor: Int) {
+        this.rouletteTextColor = textColor
         invalidate()
     }
 
-    fun getTextColor(): Int = textColor
+    fun getRouletteTextColor(): Int = rouletteTextColor
 
     fun setRouletteBorderLineColor(borderLineColor: Int) {
         rouletteBorderLineColor = borderLineColor
