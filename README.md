@@ -2,6 +2,10 @@
 
 <br/>
 
+![roulette_sample_image](https://user-images.githubusercontent.com/52662641/110210350-97360b00-7ed4-11eb-8496-91cf588e5041.gif)
+
+<br/>
+
 ## 소개
 * Android Roulette Wheel View
 * 안드로이드에서 사용할 수 있는 룰렛 뷰 입니다.
@@ -87,6 +91,7 @@ fun rotateRoulette() {
 <br/><br/>
 
 ## 남은 과제
+0. 텍스트를 룰렛 칸에 맞게 회전시키기
 1. 12시 방향에 화살표 추가 (이미지 or 그리기)
 2. 룰렛 뷰 최소 길이 설정 후 wrap_content 설정해도 적용가능하도록 수정 (지금은 match_parent 만..)
 3. 사용자 설정을 위한 속성 추가 (생각나는 부분 계속 추가 예정)
