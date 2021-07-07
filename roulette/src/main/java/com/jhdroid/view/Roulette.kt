@@ -2,7 +2,10 @@ package com.jhdroid.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
@@ -38,7 +41,6 @@ class Roulette @JvmOverloads constructor(
     private val fillPaint = Paint()
     private val centerPointPaint = Paint()
     private val textPaint = Paint()
-    private val marketPaint = Paint()
 
     init {
         val typedArray = context.theme.obtainStyledAttributes(
@@ -108,10 +110,7 @@ class Roulette @JvmOverloads constructor(
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
         if (canvas == null) return
-
-        rouletteSize = 2
 
         val rectLeft = left + paddingLeft + Constant.DEFAULT_PADDING
         val rectRight = right - paddingRight - Constant.DEFAULT_PADDING
@@ -121,7 +120,6 @@ class Roulette @JvmOverloads constructor(
         val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
 
         drawRoulette(canvas, rectF)
-        drawTopMarker(canvas, rectF)
     }
 
     private fun drawRoulette(canvas: Canvas, rectF: RectF) {
@@ -147,67 +145,12 @@ class Roulette @JvmOverloads constructor(
                 val y = (centerY + (radius * sin(medianAngle))).toFloat() + Constant.DEFAULT_PADDING
                 val text = if (i > rouletteDataList.size - 1)  emptyMessage else rouletteDataList[i]
 
-//                val rotateDegrees = calTextRotateDegrees(i, medianAngle.toFloat())
-//
-//                canvas?.save()
-//                canvas?.rotate(rotateDegrees, x, y)
                 canvas.drawText(text, x, y, textPaint)
-//                canvas?.restore()
             }
 
             // draw center point
             canvas.drawCircle(centerX, centerY, centerPointRadius, centerPointPaint)
         } else throw RuntimeException("size out of roulette")
-    }
-
-    /**
-     * 룰렛 상단 당첨 확인용 마커
-     * */
-    private fun drawTopMarker(canvas: Canvas, rectF: RectF) {
-        val triangle = 50f
-        canvas.drawLine(rectF.left, rectF.top, rectF.right, rectF.top, strokePaint) // 상단
-        canvas.drawLine(rectF.left, rectF.top, (rectF.right / 2), (rectF.top + rectF.bottom) / 2, strokePaint) // 왼 - 오
-        canvas.drawLine(rectF.right, rectF.top, (rectF.right / 2), (rectF.top + rectF.bottom) / 2, strokePaint) // 오 - 왼
-    }
-
-    /**
-     * 룰렛에 맞게 텍스트 회전
-     * */
-    private fun calTextRotateDegrees(index: Int, sweepAngle: Float): Float {
-//        return if (index == 0) {
-//            sweepAngle + 90
-//        } else {
-////            (sweepAngle * 2f) + (sweepAngle * index)
-//            (sweepAngle * 2f) * index + 90
-//        }
-        return when (rouletteSize) {
-            // 180
-            2 -> if (index == 0) 180f else 0f
-
-            // 120
-            3 -> if (index == 0) 150f else 150f + (sweepAngle * index)
-
-            // 90
-            4 -> if (index == 0) 140f else 140f + (80f * index)
-
-            // 72
-            5 -> if (index == 0) sweepAngle * 2 else sweepAngle * 2 + (sweepAngle * index)
-
-            // 60
-            6 -> if (index == 0) {
-                120f
-            } else {
-                (sweepAngle * 2) + (sweepAngle * index)
-            }
-
-            // 51.42
-            7 -> if (index == 0) sweepAngle * 2 else sweepAngle * 2 + (sweepAngle * index)
-
-            // 45
-            8 -> if (index == 0) sweepAngle * 2 else sweepAngle * 2 + (sweepAngle * index)
-
-            else -> 0f
-        }
     }
 
     /**
