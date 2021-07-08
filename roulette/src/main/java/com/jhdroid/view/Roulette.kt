@@ -19,6 +19,11 @@ class Roulette @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    companion object {
+        const val ROULETTE_MAX_SIZE = 8
+        const val ROULETTE_MIN_SIZE = 2
+    }
+
     // Roulette Attr
     private var rouletteSize = 0
     private var rouletteDataList = listOf<String>()
