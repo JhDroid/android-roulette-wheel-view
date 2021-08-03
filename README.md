@@ -10,7 +10,7 @@
 * Android Roulette Wheel View
 * 안드로이드에서 사용할 수 있는 룰렛 뷰 입니다.
 * 회전 기능을 제공하고 회전 후 결과를 리턴받을 수 있습니다.
-* 개발 과정은 블로그를 확인해주세요!
+* 개발 과정
     * https://jhdroid.tistory.com/category/Android%20Proejct/Roulette%20Wheel%20View
 
 <br/><br/>
@@ -47,7 +47,7 @@ dependencies {
         android:layout_height="0dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
-* 꼭! `height`속성은 `match_parent`(ConstraintLayout은 `0dp`)설정해야 합니다.
+* (필수) `height`속성은 `match_parent`(ConstraintLayout은 `0dp`)설정해야 합니다.
 
 <br/><br/>
 
@@ -64,7 +64,7 @@ roulette.apply {
 <br/><br/>
 
 ### Rotate result return
-1. Listener를 사용한 리턴
+* 결과를 받는 방법
 ```kotlin
 fun rotateRoulette() {
     val rouletteListener = object : RotateListener {
