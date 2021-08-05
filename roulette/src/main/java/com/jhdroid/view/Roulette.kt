@@ -2,10 +2,7 @@ package com.jhdroid.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.Animation
@@ -24,7 +21,7 @@ class Roulette @JvmOverloads constructor(
         const val ROULETTE_MIN_SIZE = 2
     }
 
-    // Roulette Attr
+    // Roulette attr
     private var rouletteSize = 0
     private var rouletteDataList = listOf<String>()
 
@@ -37,7 +34,7 @@ class Roulette @JvmOverloads constructor(
     private var rouletteTextSize = 0f
     private var emptyMessage = ""
 
-    // Center Point Attr
+    // Center point attr
     private var centerPointColor = Color.BLACK
     private var centerPointRadius = 0f
 
@@ -46,6 +43,7 @@ class Roulette @JvmOverloads constructor(
     private val fillPaint = Paint()
     private val centerPointPaint = Paint()
     private val textPaint = Paint()
+    private val topMarkerPaint = Paint()
 
     init {
         val typedArray = context.theme.obtainStyledAttributes(
@@ -109,6 +107,12 @@ class Roulette @JvmOverloads constructor(
             textAlign = Paint.Align.CENTER
         }
 
+        topMarkerPaint.apply {
+            color = Color.BLACK
+            strokeWidth = 10f
+            isAntiAlias = true
+        }
+
         shapeColors = resources.getStringArray(R.array.shape_colors)
     }
 
@@ -156,6 +160,33 @@ class Roulette @JvmOverloads constructor(
             // draw center point
             canvas.drawCircle(centerX, centerY, centerPointRadius, centerPointPaint)
         } else throw RuntimeException("size out of roulette")
+    }
+
+    /**
+     * 룰렛 상단 마커
+     * */
+    private fun drawTopMarker(canvas: Canvas, rectF: RectF) {
+        val centerX = (rectF.left + rectF.right) / 2
+        val centerY = (rectF.top + rectF.bottom) / 2
+
+        val path = Path()
+        val y = rectF.top - 30f
+
+        val point1 = PointF(centerX - Constant.DEFAULT_TOP_MARKER_LENGTH, y)
+        val point2 = PointF(centerX + Constant.DEFAULT_TOP_MARKER_LENGTH, y)
+        val point3 = PointF(centerX, rectF.top - 30f + Constant.DEFAULT_TOP_MARKER_LENGTH)
+
+
+        path.reset()
+
+        path.moveTo(point1.x, point1.y)
+        path.lineTo(point2.x, point2.y)
+        path.lineTo(point3.x, point3.y)
+        path.lineTo(point1.x, point1.y)
+
+        path.close()
+
+        canvas.drawPath(path, topMarkerPaint)
     }
 
     /**
