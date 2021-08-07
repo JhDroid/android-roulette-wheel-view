@@ -37,6 +37,11 @@ class Roulette @JvmOverloads constructor(
     // Center point attr
     private var centerPointColor = Color.BLACK
     private var centerPointRadius = 0f
+    private var centerPointVisibility = VISIBLE
+
+    // Top marker attr
+    private var topMarkerColor = Color.BLACK
+    private var topMarkerVisibility = INVISIBLE
 
     // Paint
     private val strokePaint = Paint()
@@ -44,6 +49,9 @@ class Roulette @JvmOverloads constructor(
     private val centerPointPaint = Paint()
     private val textPaint = Paint()
     private val topMarkerPaint = Paint()
+
+    private var centerX = 0f
+    private var centerY = 0f
 
     init {
         val typedArray = context.theme.obtainStyledAttributes(
@@ -108,7 +116,7 @@ class Roulette @JvmOverloads constructor(
         }
 
         topMarkerPaint.apply {
-            color = Color.BLACK
+            color = topMarkerColor
             strokeWidth = 10f
             isAntiAlias = true
         }
@@ -128,7 +136,19 @@ class Roulette @JvmOverloads constructor(
 
         val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
 
+        centerX = (rectF.left + rectF.right) / 2f
+        centerY = (rectF.top + rectF.bottom) / 2f
+
         drawRoulette(canvas, rectF)
+
+        if (centerPointVisibility == VISIBLE) {
+            canvas.drawCircle(centerX, centerY,
+                centerPointRadius, centerPointPaint)
+        }
+
+        if (topMarkerVisibility == VISIBLE) {
+            drawTopMarker(canvas, rectF)
+        }
     }
 
     private fun drawRoulette(canvas: Canvas, rectF: RectF) {
@@ -137,8 +157,6 @@ class Roulette @JvmOverloads constructor(
 
         if (rouletteSize in 2..8) {
             val sweepAngle = 360f / rouletteSize.toFloat()
-            val centerX = (rectF.left + rectF.right) / 2
-            val centerY = (rectF.top + rectF.bottom) / 2
             val radius = (rectF.right - rectF.left) / 2 * 0.5
 
             for (i in 0 until rouletteSize) {
@@ -156,10 +174,9 @@ class Roulette @JvmOverloads constructor(
 
                 canvas.drawText(text, x, y, textPaint)
             }
-
-            // draw center point
-            canvas.drawCircle(centerX, centerY, centerPointRadius, centerPointPaint)
-        } else throw RuntimeException("size out of roulette")
+        } else {
+            throw IndexOutOfBoundsException("size out of roulette")
+        }
     }
 
     /**
@@ -292,4 +309,18 @@ class Roulette @JvmOverloads constructor(
     }
 
     fun getRouletteBorderLineWidth(): Float = rouletteBorderLineWidth
+
+    fun setCenterPointVisibility(visibility: Int) {
+        centerPointVisibility = visibility
+        invalidate()
+    }
+
+    fun getCenterPointVisibility(): Int = centerPointVisibility
+
+    fun setTopMarkerVisibility(visibility: Int) {
+        topMarkerVisibility = visibility
+        invalidate()
+    }
+
+    fun getTopMarkerVisibility(): Int = topMarkerVisibility
 }
