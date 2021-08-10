@@ -90,6 +90,31 @@ class Roulette @JvmOverloads constructor(
             R.styleable.RouletteView_emptyMessage
         ) ?: Constant.DEFAULT_EMPTY_MESSAGE
 
+        centerPointRadius = typedArray.getDimension(
+            R.styleable.RouletteView_centerPointRadius,
+            Constant.DEFAULT_CENTER_POINTER_RADIUS
+        )
+
+        centerPointColor = typedArray.getColor(
+            R.styleable.RouletteView_centerPointColor,
+            Color.BLACK
+        )
+
+        centerPointVisibility = typedArray.getInt(
+            R.styleable.RouletteView_centerPointVisibility,
+            VISIBLE
+        )
+
+        topMarkerColor = typedArray.getColor(
+            R.styleable.RouletteView_topMarkerColor,
+            Color.BLACK
+        )
+
+        topMarkerVisibility = typedArray.getInt(
+            R.styleable.RouletteView_topMarkerVisibility,
+            INVISIBLE
+        )
+
         typedArray.recycle()
 
         strokePaint.apply {
@@ -142,8 +167,7 @@ class Roulette @JvmOverloads constructor(
         drawRoulette(canvas, rectF)
 
         if (centerPointVisibility == VISIBLE) {
-            canvas.drawCircle(centerX, centerY,
-                centerPointRadius, centerPointPaint)
+            canvas.drawCircle(centerX, centerY, centerPointRadius, centerPointPaint)
         }
 
         if (topMarkerVisibility == VISIBLE) {
@@ -183,16 +207,12 @@ class Roulette @JvmOverloads constructor(
      * 룰렛 상단 마커
      * */
     private fun drawTopMarker(canvas: Canvas, rectF: RectF) {
-        val centerX = (rectF.left + rectF.right) / 2
-        val centerY = (rectF.top + rectF.bottom) / 2
-
         val path = Path()
         val y = rectF.top - 30f
 
-        val point1 = PointF(centerX - Constant.DEFAULT_TOP_MARKER_LENGTH, y)
-        val point2 = PointF(centerX + Constant.DEFAULT_TOP_MARKER_LENGTH, y)
-        val point3 = PointF(centerX, rectF.top - 30f + Constant.DEFAULT_TOP_MARKER_LENGTH)
-
+        val point1 = PointF(centerX - Constant.DEFAULT_TOP_MARKER_LENGTH, y) // 왼쪽 포인트
+        val point2 = PointF(centerX + Constant.DEFAULT_TOP_MARKER_LENGTH, y) // 오른쪽 포인트
+        val point3 = PointF(centerX, rectF.top - 30f + Constant.DEFAULT_TOP_MARKER_LENGTH) // 아래쪽 포인트
 
         path.reset()
 
@@ -310,12 +330,26 @@ class Roulette @JvmOverloads constructor(
 
     fun getRouletteBorderLineWidth(): Float = rouletteBorderLineWidth
 
+    fun setCenterPointColor(centerPointColor: Int) {
+        this.centerPointColor = centerPointColor
+        invalidate()
+    }
+
+    fun getCenterPointColor(): Int = centerPointColor
+
     fun setCenterPointVisibility(visibility: Int) {
         centerPointVisibility = visibility
         invalidate()
     }
 
     fun getCenterPointVisibility(): Int = centerPointVisibility
+
+    fun setTopMarkerColor(topMarkerColor: Int) {
+        this.topMarkerColor = topMarkerColor
+        invalidate()
+    }
+
+    fun getTopMarkerColor(): Int = topMarkerColor
 
     fun setTopMarkerVisibility(visibility: Int) {
         topMarkerVisibility = visibility

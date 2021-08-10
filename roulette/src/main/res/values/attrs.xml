@@ -6,6 +6,21 @@
         <attr name="rouletteTextColor" format="reference|color"/>
         <attr name="rouletteTextSize" format="reference|dimension"/>
 
+        <attr name="centerPointRadius" format="reference|dimension"/>
+        <attr name="centerPointColor" format="reference|color"/>
+        <attr name="centerPointVisibility" format="enum">
+            <enum name="gone" value="8" />
+            <enum name="invisible" value="4" />
+            <enum name="visible" value="0" />
+        </attr>
+
+        <attr name="topMarkerColor" format="reference|color"/>
+        <attr name="topMarkerVisibility" format="enum">
+            <enum name="gone" value="8" />
+            <enum name="invisible" value="4" />
+            <enum name="visible" value="0" />
+        </attr>
+
         <attr name="rouletteSize" format="integer"/>
         <attr name="emptyMessage" format="string"/>
     </declare-styleable>
