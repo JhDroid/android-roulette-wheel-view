@@ -80,7 +80,7 @@ fun rotateRoulette() {
     // random degrees (options)
     val toDegrees = (2000..10000).random().toFloat()
     roulette.rotateRoulette(toDegrees, 4000, rouletteListener)
-}
+}ㅁ
 ```
 
 <br/><br/>
@@ -90,8 +90,8 @@ fun rotateRoulette() {
   
 <br/><br/>
 
-## 남은 과제
-0. 텍스트를 룰렛 칸에 맞게 회전시키기
-1. 12시 방향에 화살표 추가 (이미지 or 그리기)
-2. 룰렛 뷰 최소 길이 설정 후 wrap_content 설정해도 적용가능하도록 수정 (지금은 match_parent 만..)
-3. 사용자 설정을 위한 속성 추가 (생각나는 부분 계속 추가 예정)
+## 작업 목록
+- 텍스트를 룰렛 칸에 맞게 회전시키기
+- ~12시 방향에 마커 추가 (이미지 or 그리기)~
+- 룰렛 뷰 최소 길이 설정 후 wrap_content 설정해도 적용가능하도록 수정 (지금은 match_parent 만..)
+- 사용자 설정을 위한 속성 추가 (생각나는 부분 계속 추가 예정)
