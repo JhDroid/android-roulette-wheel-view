@@ -26,6 +26,7 @@ allprojects {
     }
 }
 ```
+* 저장소 변경 예정 ..
 
 <br/><br/>
 
@@ -35,6 +36,7 @@ dependencies {
     implementation 'com.github.JhDroid:android-roulette-wheel-view:1.0.0'
 }
 ```
+* 저장소 변경 예정 ..
 
 <br/><br/>
 
@@ -89,9 +91,3 @@ fun rotateRoulette() {
 ![roulette_sample_image](https://user-images.githubusercontent.com/52662641/110210350-97360b00-7ed4-11eb-8496-91cf588e5041.gif)
   
 <br/><br/>
-
-## 작업 목록
-- 텍스트를 룰렛 칸에 맞게 회전시키기
-- ~12시 방향에 마커 추가 (이미지 or 그리기)~
-- 룰렛 뷰 최소 길이 설정 후 wrap_content 설정해도 적용가능하도록 수정 (지금은 match_parent 만..)
-- 사용자 설정을 위한 속성 추가 (생각나는 부분 계속 추가 예정)

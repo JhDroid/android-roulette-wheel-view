@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.jhdroid.roulette.databinding.ActivityMainBinding
 import com.jhdroid.view.RotateListener
+import com.jhdroid.view.Roulette
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun plusRouletteSize() {
         var rouletteSize = binding.roulette.getRouletteSize()
-        if (rouletteSize == 8) return
+        if (rouletteSize == Roulette.ROULETTE_MAX_SIZE) return
 
         binding.roulette.setRouletteSize(++rouletteSize)
         binding.rouletteSizeTv.text = rouletteSize.toString()
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun minusRouletteSize() {
         var rouletteSize = binding.roulette.getRouletteSize()
-        if (rouletteSize == 2) return
+        if (rouletteSize == Roulette.ROULETTE_MIN_SIZE) return
 
         binding.roulette.setRouletteSize(--rouletteSize)
         binding.rouletteSizeTv.text = rouletteSize.toString()
