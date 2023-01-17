@@ -21,8 +21,20 @@ class Roulette @JvmOverloads constructor(
         const val ROULETTE_MIN_SIZE = 2
     }
 
-    // Roulette attr
-    private var rouletteSize = 0
+    var rouletteSize = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var emptyMessage = ""
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var isRotate = false
+
     private var rouletteDataList = listOf<String>()
 
     private var rouletteBorderLineColor = Color.BLACK
@@ -32,7 +44,6 @@ class Roulette @JvmOverloads constructor(
 
     private var rouletteTextColor = Color.BLACK
     private var rouletteTextSize = 0f
-    private var emptyMessage = ""
 
     // Center point attr
     private var centerPointColor = Color.BLACK
@@ -238,10 +249,12 @@ class Roulette @JvmOverloads constructor(
 
             override fun onAnimationStart(animation: Animation?) {
                 rotateListener?.onRotateStart()
+                isRotate = true
             }
 
             override fun onAnimationEnd(animation: Animation?) {
                 rotateListener?.onRotateEnd(getRouletteRotateResult(toDegrees))
+                isRotate = false
             }
         }
 
@@ -281,26 +294,12 @@ class Roulette @JvmOverloads constructor(
     /**
      * getter & setter
      * */
-    fun setRouletteSize(size: Int) {
-        this.rouletteSize = size
-        invalidate()
-    }
-
-    fun getRouletteSize(): Int = rouletteSize
-
     fun setRouletteDataList(rouletteDataList: List<String>) {
         this.rouletteDataList = rouletteDataList
         invalidate()
     }
 
     fun getRouletteDataList(): List<String> = rouletteDataList
-
-    fun setEmptyMessage(emptyMessage: String) {
-        this.emptyMessage = emptyMessage
-        invalidate()
-    }
-
-    fun getEmptyMessage(): String = emptyMessage
 
     fun setRouletteTextSize(textSize: Float) {
         rouletteTextSize = textSize

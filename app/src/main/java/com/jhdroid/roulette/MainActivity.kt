@@ -1,5 +1,6 @@
 package com.jhdroid.roulette
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private val rouletteData = listOf("JhDroid", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
 
+    @SuppressLint("SetTextI18n")
     private val rouletteListener = object : RotateListener {
         override fun onRotateStart() {
             binding.rotateResultTv.text = "Result : "
@@ -32,8 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupView() {
         binding.roulette.apply {
-            setRouletteSize(8)
-            binding.rouletteSizeTv.text = getRouletteSize().toString()
+            rouletteSize = Roulette.ROULETTE_MAX_SIZE
+            binding.rouletteSizeTv.text = rouletteSize.toString()
             setRouletteDataList(rouletteData)
         }
 
@@ -48,18 +50,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun plusRouletteSize() {
-        var rouletteSize = binding.roulette.getRouletteSize()
+        var rouletteSize = binding.roulette.rouletteSize
         if (rouletteSize == Roulette.ROULETTE_MAX_SIZE) return
 
-        binding.roulette.setRouletteSize(++rouletteSize)
+        binding.roulette.rouletteSize = ++rouletteSize
         binding.rouletteSizeTv.text = rouletteSize.toString()
     }
 
     private fun minusRouletteSize() {
-        var rouletteSize = binding.roulette.getRouletteSize()
+        if (binding.roulette.isRotate) return
+
+        var rouletteSize = binding.roulette.rouletteSize
         if (rouletteSize == Roulette.ROULETTE_MIN_SIZE) return
 
-        binding.roulette.setRouletteSize(--rouletteSize)
+        binding.roulette.rouletteSize = --rouletteSize
         binding.rouletteSizeTv.text = rouletteSize.toString()
     }
 }
