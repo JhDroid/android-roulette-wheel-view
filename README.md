@@ -15,7 +15,7 @@
 
 <br/><br/>
 
-## 사용
+## setup gradle
 
 ### Project Gradle
 ```groovy
@@ -26,7 +26,6 @@ allprojects {
     }
 }
 ```
-* 저장소 변경 예정 ..
 
 <br/><br/>
 
@@ -36,11 +35,10 @@ dependencies {
     implementation 'com.github.JhDroid:android-roulette-wheel-view:1.0.0'
 }
 ```
-* 저장소 변경 예정 ..
 
 <br/><br/>
 
-### layout
+### layout (xml)
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout
     <com.jhdroid.view.Roulette
@@ -66,7 +64,6 @@ roulette.apply {
 <br/><br/>
 
 ### Rotate result return
-* 결과를 받는 방법
 ```kotlin
 fun rotateRoulette() {
     val rouletteListener = object : RotateListener {
@@ -82,12 +79,12 @@ fun rotateRoulette() {
     // random degrees (options)
     val toDegrees = (2000..10000).random().toFloat()
     roulette.rotateRoulette(toDegrees, 4000, rouletteListener)
-}ㅁ
+}
 ```
 
 <br/><br/>
 
-## 뷰 적용 및 회전 예(잠시 기다리면 이미지가 나옵니다.)
+## example
 ![roulette_sample_image](https://user-images.githubusercontent.com/52662641/110210350-97360b00-7ed4-11eb-8496-91cf588e5041.gif)
   
 <br/><br/>
