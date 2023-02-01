@@ -8,14 +8,12 @@
 
 ## 소개
 * Android Roulette Wheel View
-* 안드로이드에서 사용할 수 있는 룰렛 뷰 입니다.
-* 회전 기능을 제공하고 회전 후 결과를 리턴받을 수 있습니다.
-* 개발 과정
-    * https://jhdroid.tistory.com/category/Android%20Proejct/Roulette%20Wheel%20View
+* library development post - 개발과정 (Korean)
+  * https://jhdroid.tistory.com/category/Android%20Proejct/Roulette%20Wheel%20View
 
 <br/><br/>
 
-## setup gradle
+## Gradle
 
 ### Project Gradle
 ```groovy
@@ -30,14 +28,16 @@ allprojects {
 <br/><br/>
 
 ### App Gradle
+[![](https://jitpack.io/v/JhDroid/android-roulette-wheel-view.svg)](https://jitpack.io/#JhDroid/android-roulette-wheel-view)
 ```groovy
 dependencies {
-    implementation 'com.github.JhDroid:android-roulette-wheel-view:1.0.0'
+    implementation 'com.github.JhDroid:android-roulette-wheel-view:{version}'
 }
 ```
 
 <br/><br/>
 
+## How to use ?
 ### layout (xml)
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,44 +47,52 @@ dependencies {
         android:layout_height="0dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
+* setup `android:layout_height` is `match_parent` (or ConstraintLayout : `0dp`)
 * (필수) `height`속성은 `match_parent`(ConstraintLayout은 `0dp`)설정해야 합니다.
 
 <br/><br/>
 
-### Activity
+### Activity or Fragment
 ```kotlin
 val rouletteData = listOf("JhDroid", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
-
 roulette.apply {
-    setRouletteSize(8)
+    setRouletteSize(8) // 2 ~ 8
     setRouletteDataList(rouletteData)
 }
 ```
 
 <br/><br/>
 
-### Rotate result return
+### Rotate and get result
 ```kotlin
 fun rotateRoulette() {
     val rouletteListener = object : RotateListener {
         override fun onRotateStart() {
             // rotate animation start
         }
-
         override fun onRotateEnd(result: String) {
             // rotate animation end
         }
     }
-
     // random degrees (options)
     val toDegrees = (2000..10000).random().toFloat()
     roulette.rotateRoulette(toDegrees, 4000, rouletteListener)
 }
 ```
+```kotlin
+ /**
+   * 룰렛 회전 함수
+   * @param toDegrees : end angle (start angle is '0')
+   * @param duration : rotate duration
+   * @param rotateListener : rotate anim start, end listener (선택)
+  * */
+fun rotateRoulette(toDegrees: Float, duration: Long, rotateListener: RotateListener?)
+```
+
 
 <br/><br/>
 
 ## example
 ![roulette_sample_image](https://user-images.githubusercontent.com/52662641/110210350-97360b00-7ed4-11eb-8496-91cf588e5041.gif)
-  
+
 <br/><br/>
