@@ -35,6 +35,8 @@ class Roulette @JvmOverloads constructor(
 
     var isRotate = false
 
+    private val rectF = RectF()
+
     private var rouletteDataList = listOf<String>()
 
     private var rouletteBorderLineColor = Color.BLACK
@@ -170,7 +172,7 @@ class Roulette @JvmOverloads constructor(
         val rectTop = height / 2f - rectRight / 2f + paddingTop + Constant.DEFAULT_PADDING
         val rectBottom = height / 2f + rectRight / 2f - paddingRight - Constant. DEFAULT_PADDING
 
-        val rectF = RectF(rectLeft, rectTop, rectRight, rectBottom)
+        rectF.set(rectLeft, rectTop, rectRight, rectBottom)
 
         centerX = (rectF.left + rectF.right) / 2f
         centerY = (rectF.top + rectF.bottom) / 2f
