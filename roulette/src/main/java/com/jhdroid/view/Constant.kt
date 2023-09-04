@@ -2,6 +2,7 @@ package com.jhdroid.view
 
 /**
  * Roulette module 상수(외부에서 사용하지 않음)
+ * Roulette view module const
  * */
 internal object Constant {
     const val DEFAULT_CIRCLE_BORDER_LINE_WIDTH = 16f
