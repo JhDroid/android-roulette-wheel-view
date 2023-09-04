@@ -8,6 +8,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import kotlin.math.cos
+import kotlin.math.min
 import kotlin.math.sin
 
 class Roulette @JvmOverloads constructor(
@@ -167,10 +168,12 @@ class Roulette @JvmOverloads constructor(
         super.onDraw(canvas)
         if (canvas == null) return
 
-        val rectLeft = left + paddingLeft + Constant.DEFAULT_PADDING
-        val rectRight = right - paddingRight - Constant.DEFAULT_PADDING
-        val rectTop = height / 2f - rectRight / 2f + paddingTop + Constant.DEFAULT_PADDING
-        val rectBottom = height / 2f + rectRight / 2f - paddingRight - Constant. DEFAULT_PADDING
+        val shorterLength = min(right, height)
+
+        val rectLeft = (width / 2f) - (shorterLength / 2f) + paddingLeft + Constant.DEFAULT_PADDING
+        val rectRight = (width / 2f) + (shorterLength / 2f) - paddingRight - Constant.DEFAULT_PADDING
+        val rectTop = (height / 2f) - (shorterLength / 2f) + paddingTop + Constant.DEFAULT_PADDING
+        val rectBottom = (height / 2f) + (shorterLength / 2f) - paddingBottom - Constant. DEFAULT_PADDING
 
         rectF.set(rectLeft, rectTop, rectRight, rectBottom)
 
