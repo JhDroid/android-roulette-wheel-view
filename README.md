@@ -9,7 +9,7 @@
 ## 소개
 * Android Roulette Wheel View
 * library development post - 개발과정 (Korean)
-  * https://jhdroid.tistory.com/category/Android%20Proejct/Roulette%20Wheel%20View
+  * https://jhdroid.tistory.com/23
 
 <br/><br/>
 
@@ -52,7 +52,7 @@ dependencies {
 
 <br/><br/>
 
-### Activity or Fragment
+### Use in Activity or Fragment
 ```kotlin
 val rouletteData = listOf("JhDroid", "Android", "Blog", "IT", "Developer", "Kotlin", "Java", "Happy")
 roulette.apply {
@@ -63,7 +63,7 @@ roulette.apply {
 
 <br/><br/>
 
-### Rotate and get result
+### rotate and get result
 ```kotlin
 fun rotateRoulette() {
     val rouletteListener = object : RotateListener {
@@ -71,7 +71,7 @@ fun rotateRoulette() {
             // rotate animation start
         }
         override fun onRotateEnd(result: String) {
-            // rotate animation end
+            // rotate animation end, get result here
         }
     }
     // random degrees (options)
@@ -81,7 +81,7 @@ fun rotateRoulette() {
 ```
 ```kotlin
  /**
-   * 룰렛 회전 함수
+   * Rotate roulette function
    * @param toDegrees : end angle (start angle is '0')
    * @param duration : rotate duration
    * @param rotateListener : rotate anim start, end listener (선택)
